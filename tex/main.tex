@@ -31,6 +31,14 @@
     \end{minipage}%
   }%
 }
+
+\renewcommand{\question}[1]{%
+  \todo[inline, color=yellow, caption={}]{%
+    \begin{minipage}{\linewidth}%
+      \textbf{Question:} #1%
+    \end{minipage}%
+  }%
+}
 % \DeclareMathOperator{\Uni}{Uni}
 %
 \begin{document}
@@ -68,6 +76,7 @@ todo
 \input{02prelim}
 \input{03construction}
 \input{04penrose}
+\input{05switching}
 
 %
 % ---- Bibliography ----
