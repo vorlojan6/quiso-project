@@ -4,17 +4,134 @@
 
 \subsection{Non-Local Games}
 
-\jvinline{
-    Outline the scenario:
-    Two non-communicating players try to maximize winning probability
-    \begin{itemize}
-        \item Classical strategies
-        \item quantum strategies
-        \item vector strategies?
-    \end{itemize}
-}
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \node[draw] at (0, 1) (r) {$R$};
+        \node[draw] at (-1.5, 0) (a) {$A$};
+        \node[draw] at (1.5, 0) (b) {$B$};
+
+        \draw[->] (r) to[out=180,in=90] node[pos=0.5, sloped, above] {\tiny $x \in I_A$} (a);
+        \draw[->] (a) to[out=0,in=270] node[pos=0.33, sloped, below] {\tiny $a \in O_A$} (r);
+        \draw[->] (r) to[out=0,in=90] node[pos=0.5, sloped, above] {\tiny $y \in I_B$} (b);
+        \draw[->] (b) to[out=180,in=270] node[pos=0.33, sloped, below] {\tiny $b \in O_B$} (r);
+
+        \draw[thick, latex-latex] (-1.5, -0.5) -- (1.5, -0.5) node[midway, below] {\tiny $|\psi\rangle \in \mathcal{H}_{AB}$};
+    \end{tikzpicture}
+    \caption{Graphical illustration of how non-local games are played.}
+\end{figure}
+
+Non-local games consist of two non-communicating players $A$ and $B$, which are given 
+questions $x \in I_A, y \in I_B$ by the referee, to which they must respond with an answer $a \in O_A, b \in O_B$.
+The game is won if the questions and answers fulfill some predefined condition,
+captured by a \emph{verification function}
+\[ V: I_A \times I_B \times O_A \times O_B~\rightarrow~\{0, 1\}, \]
+i.e., if $V(x, y, a, b) = 1$, the game is won.
+The probability for the players to receive questions $x$ and $y$ 
+are modelled via some probability distribution $\pi: I_A \times I_B \rightarrow [0, 1]$,
+which, for simplicity, is generally assumed to be a uniform distribution.
+
+The \emph{winning probability} of a non-local game $G$ using a strategy $S$ is defined as
+\[ \omega_S(G) = \sum_{x,y} \pi(x, y) \sum_{a,b} V(x,y,a,b)~p(a,b~|~x,y) \]
+where $p(a,b~|~x,y)$ is the probability for $A$ and $B$ to respond with $a,b$, given questions $x,y$.
+Note that this is the only term that the players
+have control over (by agreeing on a game strategy $S$ beforehand),
+while the other terms are predetermined by the game instance that is played.
+
+The caveat to non-local games is that the players are not allowed to communicate 
+during the game, but are allowed to use (possibly entangled) quantum resources, which are distributed before the game,
+to which they may apply \emph{local} changes (i.e. apply unitaries and measurements on their own share of qubits).
+%
+Studying non-local games is motivated by a peculiar phenomenon called \emph{quantum advantage},
+describing that the pre-shared quantum resources allow to devise so called \emph{quantum strategies},
+which may achieve higher winning probabilities than \emph{classical strategies},
+i.e. strategies that do not utilise these quantum resources.
+%
+Phrased in terms of the \emph{optimal (classical / quantum) winning strategy},
+\begin{align*}
+    \omega^*(G) := \sup_{S \textrm{ classical}}~\omega_S(G), & & \omega_q^*(G) := \sup_{S \textrm{ quantum}} \omega_S(G),
+\end{align*}
+there exist non-local games $G$ for which $\omega^*(G) < \omega_q^*(G)$.
+%
+Furthermore, it is known that quantum strategies are \emph{non-signalling}, 
+meaning that the answers of each player are statistically independent of each other,
+defying intuition that some form of information exchange is happening inbetween the players during the game.
+
+
+
+
+
+
+
+
+
 \subsubsection{Binary Constraint System Games}
+
+\jvinline{A big class of non-local games are BCS. They are defined as ...}
+
 \jvinline{Famous example: Magic Square}
+
+The most prominent example of a BCS is the Magic Square Game,
+which is parametrized by publicly known values $b_k \in \{ \pm 1\}$.
+The magic square comprises of nine variables $X_i \in \{ \pm 1\}$ aligned in a $3 \times 3$ grid,
+with the requirement that $\prod_{i \in k} X_i = b_k$.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \node[] at (0, 0) {
+            $\begin{pmatrix}
+                X_1 & X_2 & X_3 \\
+                X_4 & X_5 & X_6 \\
+                X_7 & X_8 & X_9 
+            \end{pmatrix}$
+            };       
+        \node[] at (1.25, 0.4) {$= b_1$};
+        \node[] at (1.25, 0.025) {$= b_2$};
+        \node[] at (1.25, -0.35) {$= b_3$};
+        \node[rotate=270] at (0.5, -1) {$= b_4$};
+        \node[rotate=270] at (0, -1) {$= b_5$};
+        \node[rotate=270] at (-0.5, -1) {$= b_6$};
+    \end{tikzpicture}
+    \caption{The Magic Square Game.}\label{fig:magic-square}
+\end{figure}
+
+
+The Magic Square game is now played as follows:
+The referee requests a random row from player A
+and a random column from player B, to which both players must respond
+with a valid assignment of the involved variables.
+The players win the game if and only if their assignments of the overlapping variable agree.
+
+\begin{example}
+    todo
+\end{example}
+
+Note that this game is parametrized by the choice
+of values $b_k$, which impacts the success of classical strategies for this game.
+While an all-one assignment $b_k = 1,~\forall k$ allows
+the trivial strategy (always respond with $X_i = 1$) to succeed with certainty,
+it is possible to choose parameters $\{b_k\}_k$, for which no optimal classical strategy exists.
+
+\begin{lemma}
+    The Magic Square game with parameters $b_1 = b_2 = ... = b_5 = +1$, $b_6 = -1$
+    has no optimal classical strategy.
+\end{lemma}
+\begin{proof}
+    todo.
+\end{proof}
+
+Interestingly, there do exist optimal quantum strategies for the Magic Square game,
+independent of the parameter choice.
+\begin{lemma}
+    The quantum strategy given by (todo) is an optimal strategy for the Magic Square game.
+\end{lemma}    
+\begin{proof}
+    todo.
+\end{proof}
+    
+
+
 
 \subsubsection{Arkhipov's Construction of BCS}
 Main source~\cite{arkhipov2012extendingcharacterizingquantummagic}
