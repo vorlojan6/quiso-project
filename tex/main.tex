@@ -1,0 +1,87 @@
+\documentclass[runningheads]{llncs}
+%
+\usepackage[T1]{fontenc}
+% T1 fonts will be used to generate the final print and online PDFs,
+% so please use T1 fonts in your manuscript whenever possible.
+% Other font encondings may result in incorrect characters.
+%
+\usepackage{graphicx}
+% Used for displaying a sample figure. If possible, figure files should
+% be included in EPS format.
+%
+% If you use the hyperref package, please uncomment the following two lines
+% to display URLs in blue roman font according to Springer's eBook style:
+\usepackage{hyperref}
+\usepackage{color}
+\renewcommand\UrlFont{\color{blue}\rmfamily}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\usepackage{todonotes}
+
+
+\usepackage[caption=false]{subfig}
+
+\newcommand{\jvinline}[1]{%
+  \todo[inline, color=teal, caption={}]{%
+    \begin{minipage}{\linewidth}%
+      #1%
+    \end{minipage}%
+  }%
+}
+% \DeclareMathOperator{\Uni}{Uni}
+%
+\begin{document}
+%
+\title{Quantum Isomorphisms of Finite Graphs -- \\A Construction from the Penrose Dodecahedron}
+%
+\titlerunning{Quantum Isomorphisms of Finite Graphs}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\author{
+Jan Vorloeper
+}
+%
+\authorrunning{J.\@ Vorloeper}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+%
+\institute{
+Ruhr University Bochum, Bochum, Germany \\
+\email{firstname.lastname@rub.de}
+}
+%
+\maketitle              % typeset the header of the contribution
+%
+\begin{abstract}
+todo
+
+\keywords{Graph Isomorphism \and Non-local Games}
+\end{abstract}
+%
+%
+%
+\input{01intro}
+\input{02prelim}
+\input{03construction}
+\input{04penrose}
+
+%
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
+\bibliographystyle{splncs04}
+\bibliography{biblio}
+%
+\end{document}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
