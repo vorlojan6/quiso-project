@@ -10,9 +10,19 @@
 
 \subsection{The Penrose Dodecahedron}
 
-Main source~\cite{Vlasov2024}
+Main sources~\cite{Vlasov2024,ZIMBA1993697}.
 
-\jvinline{Give construction of it, its group structure etc.}
+Let $\omega = \frac{-1 + \sqrt{3}i}{2}$ be the third root of unity over $\mathbb{C}$, satisfying $\omega^3 = 1$.
+The Penrose Dodecahedron can then be defined as the following set of 40 vectors in $\mathbb{C}^4$:
+\begin{align*}
+    \left(1, 0, 0, 0\right) & \left(0, 1, 0, 0\right) & \left(0, 0, 1, 0\right) & \left(0, 0, 0, 1\right) \\
+    \left(\right) & \left(\right) & \left(\right) & \left(\right) \\
+    \left(\right) & \left(\right) & \left(\right) & \left(\right) \\
+\end{align*}
+
+
+
+% \jvinline{Give construction of it, its group structure etc.}
 
 \question{
     Is the group we want to analyse the one called $\mathcal{W}$ in~\cite[Section 1]{Vlasov2024},
@@ -25,6 +35,14 @@ Main source~\cite{Vlasov2024}
     Find central type subgroup with coisotropic stabilizers?
     \begin{itemize}
         \item Unlike for $E_8$, the Pauli Matrices are probably not the solution
+        \item Rather, the matrices $R_k \in M_4(\mathbb{C})$, $k \in \{1, \dots, 4\}$ appearing in~\cite{Vlasov2024} seem promising:
+        They fulfill the following properties: \begin{itemize}
+            \item $R_k$ is unitary, i.e. $R_k R_k^\dagger = R_k^\dagger R_k = 1$
+            \item $R_k^3 = 1$
+            \item $R_k = R_k^T$
+            \item Combining these facts, we get $R_k^2 = R_k^\dagger = \overline{R_k}$ (?)
+        \end{itemize} 
+        \item Furthermore, in~\cite{ZIMBA1993697} they mention two graphs $Q, Q^*$, which are similar but not isomorphic. Maybe good candidates?
     \end{itemize}
 }
 

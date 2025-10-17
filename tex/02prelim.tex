@@ -106,6 +106,28 @@ The players win the game if and only if their assignments of the overlapping var
 \begin{example}
     todo
 \end{example}
+\begin{figure}
+    \centering
+    \begin{tikzpicture}
+        \magicsquare{0}{0}        
+        \node[] at (-1, 1)  {\large $\mathbf{-1}$};
+        \node[] at (0, 1)   {\large $\mathbf{1}$};
+        \node[] at (1, 1)   {\large $\mathbf{-1}$};
+        \node[] at (-1, 0)  {\large $\mathbf{1}$};
+        \node[] at (0, 0)   {\large $\mathbf{1}$};
+        \node[] at (1, 0)   {\large $\mathbf{1}$};
+        \node[] at (-1, -1) {\large $\mathbf{1}$};
+        \node[] at (0, -1)  {\large $\mathbf{-1}$};
+        \node[] at (1, -1)  {\large $\mathbf{1}$};
+
+        \node[] at (2, 1) {$= b_1$};
+        \node[] at (2, 0) {$= b_2$};
+        \node[] at (2, -1) {$= b_3$};
+        \node[rotate=270] at (1, -2) {$= b_4$};
+        \node[rotate=270] at (0, -2) {$= b_5$};
+        \node[rotate=270] at (-1, -2) {$= b_6$};
+    \end{tikzpicture}
+\end{figure}
 
 Note that this game is parametrized by the choice
 of values $b_k$, which impacts the success of classical strategies for this game.
@@ -114,7 +136,7 @@ the trivial strategy (always respond with $X_i = 1$) to succeed with certainty,
 it is possible to choose parameters $\{b_k\}_k$, for which no optimal classical strategy exists.
 
 \begin{lemma}
-    The Magic Square game with parameters $b_1 = b_2 = ... = b_5 = +1$, $b_6 = -1$
+    The Magic Square game with parameters as in~\ref{} % $b_1 = b_2 = ... = b_5 = +1$, $b_6 = -1$
     has no optimal classical strategy.
 \end{lemma}
 \begin{proof}
