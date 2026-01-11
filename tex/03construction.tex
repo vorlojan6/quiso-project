@@ -1,27 +1,111 @@
-\section{Known Constructions}
+\section{Quantum-Isomorphic Strongly Regular Graphs from Spherical Designs}
 
-\subsection{Construction of Graphs from Binary Constraint Systems}
+A more recent approach to find quantum isomorphisms comes 
+from the study of spherical designs.
+As these spherical designs are highly symmetric,
+their orthogonality graphs are strongly regular.
+Furthermore, geometric conditions for quantum symmetry of
+such graphs have been found, allowing to translate this
+problem into one of representation theoretic nature.
+We start by discussing the first and (up to date) only known pair
+of strongly regular graphs, and continue to evaluate other potential candidates.
 
-Main source~\cite{atserias2017quantumnonsignallinggraphisomorphisms}
-
-\jvinline{
-    \begin{itemize}
-        \item Give the construction via the magic square game example
-        \item Show why this works
-    \end{itemize}
-}
+\begin{definition}
+    A \emph{spherical design} is something cool.
+\end{definition}
 
 
-\subsection{Construction of Graphs from the $E_8$ Root System}
+\begin{lemma}
+Let $\Gamma$ be a graph with no quantum symmetries.
+Then there is a bijection between 
+\begin{itemize}
+    \item Isomorphism classes of graphs $\Gamma'$ quantum-isomorphic to $\Gamma$
+    \item Central type subgroups $(L, \psi) \subseteq \textrm{Aut}(\Gamma)$ with coisotropic stabilizers,
+    up to conjugation.
+\end{itemize}
+\end{lemma}
 
-Main source~\cite{schmidt2022quantumisomorphicstronglyregular}
+\begin{table}
+    \centering
+    \caption{
+        Overview of spherical $(t, t)$-designs and their properties, extended from~\cite{HUGHES202184}.
+        The entry in column \emph{Orthogonality Graph} contains the strongly regular graph parameters.
+    }
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{c|c|c|l|c}
+        Name & Description  & Ambient & Automorphism group & Orthogonality graph \\
+        \hline
+        Penrose Dodecahedron & 40 vector $(3, 3)$-design & $\mathbb{C}^4$ & $ST32 \cong \mathbb{Z}_3 \times U_4(2)$ & $(40, 12, 2, 4)$ \\
+        $GQ(4, 2)$ & 45 vector $(2, 2)$-design & $\mathbb{C}^5$ & $ST33 \cong \mathbb{Z}_2 \times PSU_4(2)$ & $(45, 12, 3, 3)$ \\
+        Coxeter-Todd lattice $\Lambda_6^\omega$ & 126 vector $(3, 3)$-design & $\mathbb{C}^6$ & $ST34 \cong \mathbb{Z}_3 . \Omega_6^- . \mathbb{Z}_2$ & $(126, 45, 12, 18)$ \\
+        \hline
+        $E_6$ lattice & 36 vector $(2, 2)$-design & $\mathbb{R}^6$ & $ST35 \cong PSU_4(2) . \mathbb{Z}_2$ & $(36, 15, 6, 6)$ \\
+        $E_7$ lattice & 63 vector $(2, 2)$-design & $\mathbb{R}^7$ & $ST36 \cong \mathbb{Z}_2 \times Sp_6(2)$ & $(63, 30, ?, ?)$ \\
+        $E_8$ lattice & 120 vector $(2, 2)$-design & $\mathbb{R}^8$ & $ST37 \cong \mathbb{Z}_2 . O_8^+(2)$ & $(120, 63, 30, 36)$ \\
+    \end{tabular}}
+\end{table}
 
-\jvinline{
-    A different approach, showing that quiso graphs are more general than quantum optimal BCS
-}
+\subsection{Strongly Regular Graphs from the $E_8$ Root System}
 
-\jvinline{
-    Use the fact that $E_8$ contains 15 sets of distinct bases $e_i^{(j)}$ of $\mathbb{R}^8$,
-    and use projections onto $e_0^{(j)}$ together with automorphisms mapping $e_i^{(j)}$ onto $e_{i+1}^{(j)}$
-    to get a magic unitary. 
-}
+We begin our survey with the only known example of a strongly regular graph with a non-isomorphic, quantum isomorphic counterpart.
+This section summarizes the main results that lead to this discovery~\cite{schmidt2022quantumisomorphicstronglyregular}.
+
+\begin{definition}
+    The $E_8$ root system $\Psi_{E_8}$ consists of the $112 + 128 = 240$ vectors in $\mathbb{R}^8$, being of the form
+    \begin{align}
+    \pm e_i \pm e_j,~\forall 1 \leqslant i < j \leqslant 8, \quad x = (x_1, \dots, x_8) \textrm{ with } x_i \in \{\pm1\} \textrm{ and } \prod_{i=1}^8 = 1.
+    \end{align}
+    It is a spherical $(2, 2)$-design denoted as ST37 in~\cite{HUGHES202184}, which is the name of its automorphism group
+    in the classification of finite unitary reflection groups by Shephard and Todd. %~\cite{}
+\end{definition}
+
+From this root system, we construct the orthogonality graph $G_{E_8}$ as follows.
+Let $V(G_{E_8}) := \{v_x~|~x \in \Psi_{E_8}, x \equiv -x\}$ and $E(G_{E_8}) := \{ (v_x, v_y)~|~\langle x, y\rangle = 0\}$.
+This graph is strongly regular with parameters $(120, 63, 30, 36)$.
+
+Describing the central type subgroup $L \subseteq \textrm{Aut}(G_{E_8})$ with coisotropic stabilizers
+requires the definition of the real Pauli matrices.
+\begin{definition}
+    The real Pauli matrices are defined to be the following matrices:
+    \begin{align}
+        I = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}, \quad
+        X = \begin{pmatrix}0 & 1 \\ 1 & 0\end{pmatrix}, \quad
+        Z = \begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix}, \quad
+        Y = XZ.
+    \end{align}
+\end{definition}
+Recall that the relations $X^\dagger = X,~Z^\dagger = Z,~Y^\dagger = -Y,~X^2 = Y^2 = Z^2 = I$ hold.
+Note also that from these relations it follows that $X$ and $Z$ anticommute, i.e. $XZ = -ZX$.
+We will use these facts to show the following theorem.
+
+\begin{theorem}
+    The matrices $M := M_0 \otimes M_1 \otimes M_2$ with $M_i \in \{I,X,Y,Z\}$ induce automorphisms
+    $\sigma_M : V(G_{E_8}) \rightarrow V(G_{E_8}),~v_x \mapsto v_{Mx}$
+    which form a subgroup $L \cong \mathbb{Z}_2^6$ of $\textrm{Aut}(G_{E_8})$.
+\end{theorem}
+
+\begin{proof}
+    We first show $\sigma_M \in \textrm{Aut}(G_{E_8})$.
+    
+    Note that due to the identification $v_x = v_{-x}$ for vectors $x \in \Psi_{E_8}$,
+    the $ZX$ and $XZ$ as tensor factors will be identified as the same when considering automorphisms of $G_{E_8}$,
+    therefore each tensor term yields the group structure of $\mathbb{Z}_2^2$.
+    Moreover, since each tensor factor is independent of the other, we get $L \cong (\mathbb{Z}_2^2)^3 \cong \mathbb{Z}_2^6$.
+    
+\end{proof}
+
+
+Furthermore, the action of $L$ partitions the vertex set of $G_{E_8}$ into 15 orbits of size 8, where each orbit comprises of a clique.
+
+
+% Main source~\cite{schmidt2022quantumisomorphicstronglyregular}
+
+% \jvinline{
+%     A different approach, showing that quiso graphs are more general than quantum optimal BCS
+% }
+
+% \jvinline{
+%     Use the fact that $E_8$ contains 15 sets of distinct bases $e_i^{(j)}$ of $\mathbb{R}^8$,
+%     and use projections onto $e_0^{(j)}$ together with automorphisms mapping $e_i^{(j)}$ onto $e_{i+1}^{(j)}$
+%     to get a magic unitary. 
+% }

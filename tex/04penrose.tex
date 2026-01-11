@@ -1,52 +1,185 @@
 \section{Construction of Quantum Isomorphic Graphs from the Penrose Dodecahedron}
 
-\subsection{Kochen-Specker Sets}
-
-\jvinline{
-    Picking up from the $E_8$ subsection right above,
-    state why Kochen-Specker sets are interesting here
-}
-\jvinline{Another example (next to $E_8$) of a KS set is the Penrose Dodecahedron}
-
 \subsection{The Penrose Dodecahedron}
 
-Main sources~\cite{Vlasov2024,ZIMBA1993697}.
+\newcommand{\w}{\omega}
+\newcommand{\bw}{\overline{\w}}
 
-Let $\omega = \frac{-1 + \sqrt{3}i}{2}$ be the third root of unity over $\mathbb{C}$, satisfying $\omega^3 = 1$.
-The Penrose Dodecahedron can then be defined as the following set of 40 vectors in $\mathbb{C}^4$:
+The Penrose Dodecahedron $\Phi$ is a set of 40 rays $\{ |\phi_i \rangle \}_{i=1}^{40}$ in
+$\mathbb{C}^4$ represented by the vectors:
 \begin{align*}
-    \left(1, 0, 0, 0\right) & \left(0, 1, 0, 0\right) & \left(0, 0, 1, 0\right) & \left(0, 0, 0, 1\right) \\
-    \left(\right) & \left(\right) & \left(\right) & \left(\right) \\
-    \left(\right) & \left(\right) & \left(\right) & \left(\right) \\
+    &|\phi_1 \rangle = (1,0,0,0),            &~|\phi_2 \rangle = (0,1,0,0),           &~|\phi_3 \rangle = (0,0,1,0),           &~|\phi_4 \rangle = (0,0,0,1), \\
+    &|\phi_5 \rangle = (0,1,-1,1),           &~|\phi_6 \rangle = (1,0,-1,-1),         &~|\phi_7 \rangle = (1,-1,0,1),          &~|\phi_8 \rangle = (1,1,1,0), \\    
+    &|\phi_{9} \rangle = (0,1,-\w,\bw),      &~|\phi_{10} \rangle = (1,0,-\w,-\bw),   &~|\phi_{11} \rangle = (1,-\w,0,\bw),    &~|\phi_{12} \rangle = (1,\w,\bw,0), \\    
+    &|\phi_{13} \rangle = (0,1,-\bw,\w),     &~|\phi_{14} \rangle = (1,0,-\bw,-\w),   &~|\phi_{15} \rangle = (1,-\bw,0,\w),    &~|\phi_{16} \rangle = (1,\bw,\w,0), \\    
+    &|\phi_{17} \rangle = (0,1,-\w,1),       &~|\phi_{18} \rangle = (1,0,-1,-\w),     &~|\phi_{19} \rangle = (1,-\bw,0,\bw),   &~|\phi_{20} \rangle = (1,\w,1,0), \\    
+    &|\phi_{21} \rangle = (0,1,-\bw,\bw),    &~|\phi_{22} \rangle = (1,0,-\w,-1),     &~|\phi_{23} \rangle = (1,-1,0,\w),      &~|\phi_{24} \rangle = (1,\bw,\bw,0), \\    
+    &|\phi_{25} \rangle = (0,1,-1,\w),       &~|\phi_{26} \rangle = (1,0,-\bw,-\bw),  &~|\phi_{27} \rangle = (1,-\w,0,1),      &~|\phi_{28} \rangle = (1,1,\w,0), \\    
+    &|\phi_{29} \rangle = (0,1,-\bw,1),      &~|\phi_{30} \rangle = (1,0,-1,-\bw),    &~|\phi_{31} \rangle = (1,-\w,0,\w),     &~|\phi_{32} \rangle = (1,\bw,1,0), \\    
+    &|\phi_{33} \rangle = (0,1,-1,\bw),      &~|\phi_{34} \rangle = (1,0,-\w,-\w),    &~|\phi_{35} \rangle = (1,-\bw,0,1),     &~|\phi_{36} \rangle = (1,1,\bw,0), \\    
+    &|\phi_{37} \rangle = (0,1,-\w,\w),      &~|\phi_{38} \rangle = (1,0,-\bw,-1),    &~|\phi_{39} \rangle = (1,-1,0,\bw),     &~|\phi_{40} \rangle = (1,\w,\w,0) \\    
 \end{align*}
+where $\w = e^{\frac{2\pi i}{3}}$ is the third complex root of unity.
+In the context of this work, a ray is defined to be the equivalence class
+$\left\{ \pm\w^d \cdot v \right\}, \forall v \in \Phi$.
+
+\subsection{The Kochen-Specker Theorem and Kochen-Specker Sets}
+This configuration of rays first appeared in~\cite{ZIMBA1993697}
+and was used to construct a proof of the Kochen-Specker
+theorem on non-contextuality.
+In short, the Kochen-Specker theorem claims the
+non-existence of hidden-variable theories which are compatible
+with the rules of quantum mechanics.
+The idea of its proof is to find a set of rays $S$
+(describing the possible states of some quantum system)
+for which a non-contextual hidden-variable labelling $f~:~S \rightarrow \{0, 1\}$
+can not exist, meaning that the measurement outcome of some measurement on $S$
+can not be classically predicted by $f$.
+
+Note that the Magic Square Game has essentially those properties.
+There is no classical labelling function $f$ which allows the players
+to win with certainty. Yet, the measurements involved in the
+winning quantum strategy perfectly describe the state space of 
+the Magic Square Game, which is why the players can exploit their
+shared quantum state to win with absolute certainty.
+
+Since the original proof of the Kochen-Specker theorem,
+a number of such configurations were found, in different Hilbert Spaces
+and with different numbers of rays.
+Therefore, in order to reference all those configurations
+sharing this special property, the following term was coined.
+\begin{definition}
+    A \emph{Kochen-Specker Set} $S$ is a configuration of
+    rays in some Hilbert Space which have no hidden-variable labelling and
+    therefore give a proof of the Kochen-Specker theorem.
+\end{definition}
+Naturally, the smaller, simpler or more symmetric a
+Kochen-Specker set is, the more intrinsic academic
+value it has, which is why the Penrose Dodecahedron was
+studied in the first place.
+
+
+Due to the above observations, the relevance of
+Kochen-Specker sets for non-local games is assumed to be clear and
+shall not require no further argumentation.
+
+
+\subsection{The Graphs $Q$ and $Q^*$}
+
+In~\cite{ZIMBA1993697}, the argumentation about the non-existence of 
+hidden-variable labelling functions included the graphs $Q$ and $Q^*$.
+\begin{definition}
+    We define the following graphs:
+    \begin{enumerate}
+        \item The graph $Q = (V_Q, E_Q)$ is the orthogonality graph of $\Phi$, i.e. 
+            \begin{align}
+                V_Q = \left\{ v_i := v_{|\phi_i \rangle}~\middle|~|\phi_i \rangle \in \Phi \right\},~E_Q = \left\{ (v_i, v_j)~\iff~\langle \phi_i | \phi_j \rangle = 0 \right\}
+            \end{align}
+
+        \item The graph $Q^* = (V_{Q^*}, E_{Q^*})$ is called the basis graph of $\Phi$, with
+            \begin{align}
+                V_{Q^*} = \left\{ v_S~|~S \subset \Phi \textrm{ orthonormal basis} \right\},~E_{Q^*} = \left\{ (v_{S_1}, v_{S_2}) \iff S_1 \cap S_2 \neq \emptyset \right\}
+            \end{align}
+            In words, the vertices of $Q^*$ correspond to the orthonormal bases, and vertices share an edge if the respective bases share a vector.
+    \end{enumerate}
+\end{definition}
+
+\subsubsection{A curious duality.}
+
+As noted in~\cite{ZIMBA1993697}, the graphs have an unusually large number of properties in common.
+As an example, the fact that $|V_Q| = |V_{Q^*}| = 40$ is unexpected and is a priori purely coincidental.
+For context, considering the graph $G_{E_8}^*$ as the basis graph of the $E_8$ root system,
+the vertex counts are totally different and do not seem to be related:
+$|G_{E_8}| = 120 \neq 2025 = |G_{E_8}^*|$.
+
+Moreover, the condition $S_1 \cap S_2 \neq \emptyset$ that determines whether vertices in $Q^*$
+are connected is equivalent to the condition
+$\exists \tilde{v} \in \Phi:S_1 \cap S_2 = \{ \tilde{v} \}$, i.e. orthonormal bases in $\Phi$ share at most one ray.
+This gives an interesting duality between $Q$ and $Q^*$,
+since the maximal 4-cliques in $Q^*$ correspond to a unique vertex in $Q$ and vice versa.
+
+Additionally,
+the two graphs are both strongly regular graphs with the same parameters,
+i.e.
+\[ Q, Q^* \in \textsf{SRG}(40, 12, 2, 4). \]
+Yet, as pointed out in~\cite{ZIMBA1993697}, the graphs are not isomorphic,
+as any subgraph of $Q$ with vertex count 10 must contain an edge, while this 
+is not the case for $Q^*$.
+
+Next, we see that especially the last property suggests the existence of a quantum isomorphism between $Q$ and $Q^*$.
+\begin{lemma}
+    Quantum isomorphisms preserve the parameters of strongly regular graphs.
+\end{lemma}
+\begin{proof}
+    From~\cite[Theorem 9.1.2]{brouwer12}, we deduce that strongly regular graphs 
+    have exactly three eigenvalues, where the first one is equal to $k$ and the other two are called 
+    restricted eigenvalues $r, s$.
+    Next, due to~\cite[Theorem 9.1.3]{brouwer12},
+    the values of $r$ and $s$ determine the values of $n,k,\lambda,\mu$ uniquely, and vice versa.
+    Since quantum isomorphic graphs are cospectral~\cite{atserias2017quantumnonsignallinggraphisomorphisms}
+    (meaning that their spectrum $(k, r, s)$ is preserved), we arrive at our claim.
+\end{proof}
+% \todo{This can be written way earlier}
+% Denote the graph isomorphism as $\varphi:G_1 \rightarrow G_2$.
+% By definition, graph $G$ is strongly regular with parameters $(n, k, \lambda, \mu)$ if:
+% \begin{itemize}
+%     \item $|V(G)| = n$
+%     \item Each vertex $v \in V(G)$ has exactly $k$ neighbours
+%     \item Each pair of adjacent vertices have $\lambda$ common neighbours
+%     \item Each pair of non-adjacent vertices have $\mu$ common neighbours
+% \end{itemize}
+% Next, since a quantum isomorphism translates to a perfect quantum
+% strategy of the graph isomorphism game, meaning that
+% $v_1 \sim v_2 \iff \varphi(v_1) \sim \varphi(v_2)$, where $\sim$ means either 
+% equality, adjacency or non-adjacency.
+
+\subsubsection{Counting homomorphisms from planar graphs.}
+
+To strengthen the hypothesis that, if existent,
+the quantum isomorphism maps between the pair of graphs $(Q, Q^*)$
+and not to some other graph in $\textsf{SRG}(40, 12, 2, 4)$,
+we make use of~\cite[Theorem 7.16]{mančinska2019quantumisomorphismequivalentequality}.
+This theorem states that quantum isomorphic graphs admit
+the same number of homomorphism counts from any planar graph.
+
+By iterating over all graphs in $\textsf{SRG}(40, 12, 2, 4)$
+(of which only 28 exist, see the classification in~\cite{Spence2000}),
+and choosing a suitable planar graph $H$, we may divide those
+28 graphs into classes containing 
+graphs with the same homomorphism count.
+
+From those 28 graphs, only $Q$ and $Q^*$ have 40 4-cliques,
+while the other graphs have at most 24.
+Thus, taking $H$ to be $K_4$, the complete graph on 4 vertices,
+we may directly compute the homomorphism count
+\[ |\textrm{Hom}(K_4, Q)| = |\textrm{Hom}(K_4, Q^*)| = 4! \cdot 40 = 960, \]
+while the homomorphism count for any of the other graphs is at most
+$4! \cdot 24 = 576$.
+While this computation neither proves nor strengthens the claim
+that $Q$ and $Q^*$ are quantum isomorphic, it shows that 
+if any of the two graphs admit a quantum isomorphism, it has to 
+map into the other graph of this pair.
+% Conversely, if neither of the two graphs induce a quantum isomorphism,
 
 
 
-% \jvinline{Give construction of it, its group structure etc.}
 
-\question{
-    Is the group we want to analyse the one called $\mathcal{W}$ in~\cite[Section 1]{Vlasov2024},
-    i.e. the "transitive group of 25920 unitary projective transformations of $\mathbb{CP}^3$
-    sending the configuration of 40 points to itself"?
 
-}
 
-\jvinline{
-    Find central type subgroup with coisotropic stabilizers?
-    \begin{itemize}
-        \item Unlike for $E_8$, the Pauli Matrices are probably not the solution
-        \item Rather, the matrices $R_k \in M_4(\mathbb{C})$, $k \in \{1, \dots, 4\}$ appearing in~\cite{Vlasov2024} seem promising:
-        They fulfill the following properties: \begin{itemize}
-            \item $R_k$ is unitary, i.e. $R_k R_k^\dagger = R_k^\dagger R_k = 1$
-            \item $R_k^3 = 1$
-            \item $R_k = R_k^T$
-            \item Combining these facts, we get $R_k^2 = R_k^\dagger = \overline{R_k}$ (?)
-        \end{itemize} 
-        \item Furthermore, in~\cite{ZIMBA1993697} they mention two graphs $Q, Q^*$, which are similar but not isomorphic. Maybe good candidates?
-    \end{itemize}
-}
 
-\jvinline{
-    The approach (as for $E_8$): Look at $G$, construct magic unitary $u$, compute $A_H = u A_G u^\dagger$
-    to get the pair $(G, H)$ and hope $G \not \cong H$.
-}
+
+
+
+
+
+
+
+
+
+
+
+% \jvinline{
+%     Note that the 40 vectors form 40 orthonormal bases,
+%     furthermore we can partition the 40 vectors into 10 disjoint bases in 36 different ways.
+% }
+
