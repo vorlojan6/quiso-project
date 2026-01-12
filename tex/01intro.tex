@@ -1,2 +1,47 @@
 \section{Introduction}
 
+
+The recent advances in quantum information and quantum computation have profoundly transformed computational science.
+There are many scientific fields that will potentially benefit from the existence of a full-scale quantum computer, 
+including economics, physics (via efficient simulation of quantum systems)
+and even machine learning (see e.g.~\cite{du2025quantummachinelearninghandson}).
+However, the most significant and impactful application of quantum computing is in the field of
+cybersecurity, as Shor's algorithm~\cite{Shor_1997} allows to break conventional asymmetric cryptography
+based on prime factorization or discrete logs exponentially faster than any classical computer.
+This discovery fundamentally disrupted cryptographic research, paving the way for the emergence of a new field
+called post-quantum cryptography, in which new cryptographic systems are designed which conjecturally resist the
+dangers of quantum algorithms.
+Moreover, quantum phenomena such as superdense coding~\cite{Harrow_2004} and quantum teleportation~\cite{PhysRevLett.70.1895}
+lays the groundwork for the field of quantum cryptography,
+which is the study of quantum protocols resistant to eavesdropping.
+
+A formal method to quantify these seemingly information-theoretic advantages of quantum physics
+comes from the study of \emph{non-local games}.
+A non-local game is an interactive cooperative game, in which the players win by fulfillling 
+a given relation between the questions that are given to each player and their respective answers. 
+While there is no communication allowed between the players during the game, possibly entangled quantum resources are allowed to be shared.
+By leveraging this quantum advantage it is possible for the players to achieve winning
+probabilities that exceed those of any classical (i.e. non-quantum) strategy.
+
+Perhaps the best known non-local game is the magic square game
+introduced in~\cite{aravind2003simpledemonstrationbellstheorem},
+in which a $3 \times 3$ grid of $\pm1$ entries must be (partially) filled by the players,
+such that each row multiplies to $1$ and each column multiplies to $-1$.
+The first player gets asked the assignments of a specific row, while the second player
+is asked about a column. The game is won if the mutual entry of the magic square is
+filled with the same values by both players.
+While any strategy that involves entirely filling the magic square beforehand and answering 
+according to this assignment is impossible by design, it is possible to leverage the quantum resources to 
+win the game with certainty.
+Due to this seemingly magical phenomenon,
+the magic square game is an example of what is called a \emph{pseudo-telepathic} game.
+
+Another example of such a \emph{pseudo-telepathic} game is the graph isomorphism game,
+which is parametrized by two publicly known graphs $G$ and $H$.
+The referee’s questions to each player comprises of a vertex of $G$,
+to which the players must answer with a vertex of $H$. 
+In order to win, the nodes given as answers must fulfill the same adjacency relations in
+$H$ as the nodes that are given as questions by the referee do in $G$.
+While one can construct a perfect classical game strategy if and only if $G$ and $H$ are isomorphic, 
+it is known that non-isomorphic graph pairs exist for which a perfect quantum strategy can be found.
+Such graph pairs are said to be quantum-isomorphic.

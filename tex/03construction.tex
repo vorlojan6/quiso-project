@@ -1,3 +1,81 @@
+\section{Examples of Quantum Isomorphic Graphs}
+
+In this section we give a survey on known examples of
+quantum isomorphic graphs.
+We start by showing that the magic square game
+gives quantum isomorphic pairs of graphs and continue
+with more a general construction, which does not involve 
+binary constraint games.
+
+\subsection{Quantum Isomorphic Graphs from the Magic Square Game}
+
+
+
+\subsection{Quantum Isomorphic Strongly Regular Graphs from the $E_8$ Root System}
+
+We continue our survey with the only known example of a
+strongly regular graph with a non-isomorphic, quantum isomorphic counterpart.
+This section summarizes the main results that lead to this
+discovery.
+See~\cite{schmidt2022quantumisomorphicstronglyregular} for further details.
+
+\begin{definition}
+    The $E_8$ root system $\Psi_{E_8}$ consists of the $112 + 128 = 240$ vectors in $\mathbb{R}^8$, being of the form
+    \begin{align}
+    \pm e_i \pm e_j,~\forall 1 \leqslant i < j \leqslant 8, \quad x = (x_1, \dots, x_8) \textrm{ with } x_i \in \{\pm1\} \textrm{ and } \prod_{i=1}^8 = 1.
+    \end{align}
+    It is a spherical $(2, 2)$-design denoted as ST37 in~\cite{HUGHES202184}, which is the name of its automorphism group
+    in the classification of finite unitary reflection groups by Shephard and Todd. %~\cite{}
+\end{definition}
+
+From this root system, we construct the orthogonality graph $G_{E_8}$ as follows.
+Let $V(G_{E_8}) := \{v_x~|~x \in \Psi_{E_8}, x \equiv -x\}$ and $E(G_{E_8}) := \{ (v_x, v_y)~|~\langle x, y\rangle = 0\}$.
+This graph is strongly regular with parameters $(120, 63, 30, 36)$.
+
+% Describing the central type subgroup $L \subseteq \textrm{Aut}(G_{E_8})$ with coisotropic stabilizers
+% requires the definition of the real Pauli matrices.
+
+Below we recall the notion of real Pauli matrices, as these will be used 
+to describe certain automorphisms of $G_{E_8}$.
+\begin{definition}
+    The real Pauli matrices are defined to be the following matrices:
+    \begin{align}
+        I = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}, \quad
+        X = \begin{pmatrix}0 & 1 \\ 1 & 0\end{pmatrix}, \quad
+        Z = \begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix}, \quad
+        Y = XZ.
+    \end{align}
+\end{definition}
+Recall that the relations $X^\dagger = X,~Z^\dagger = Z,~Y^\dagger = -Y,~X^2 = Y^2 = Z^2 = I$ hold.
+Note also that from these relations it follows that $X$ and $Z$ anticommute, i.e. $XZ = -ZX$.
+We will use these facts to show the following theorem.
+
+\begin{theorem}
+    The matrices $M := M_0 \otimes M_1 \otimes M_2$ with $M_i \in \{I,X,Y,Z\}$ induce automorphisms
+    $\sigma_M : V(G_{E_8}) \rightarrow V(G_{E_8}),~v_x \mapsto v_{Mx}$
+    which form a subgroup $L \cong \mathbb{Z}_2^6$ of $\textrm{Aut}(G_{E_8})$.
+\end{theorem}
+
+\begin{proof}
+    We first show $\sigma_M \in \textrm{Aut}(G_{E_8})$.
+    
+    Note that due to the identification $v_x = v_{-x}$ for vectors $x \in \Psi_{E_8}$,
+    the $ZX$ and $XZ$ as tensor factors will be identified as the same when considering automorphisms of $G_{E_8}$,
+    therefore each tensor term yields the group structure of $\mathbb{Z}_2^2$.
+    Moreover, since each tensor factor is independent of the other, we get $L \cong (\mathbb{Z}_2^2)^3 \cong \mathbb{Z}_2^6$.
+    
+\end{proof}
+
+
+Furthermore, the action of $L$ partitions $V(G_{E_8})$
+into 15 orbits of size 8, where each orbit comprises of a clique, 
+or equivalently of a orthonormal basis in the $E_8$ root system.
+
+\todo{continue here}
+
+
+
+\todo[inline]{}
 \section{Quantum-Isomorphic Strongly Regular Graphs from Spherical Designs}
 
 A more recent approach to find quantum isomorphisms comes 
@@ -45,57 +123,7 @@ Then there is a bijection between
     \end{tabular}}
 \end{table}
 
-\subsection{Strongly Regular Graphs from the $E_8$ Root System}
-
-We begin our survey with the only known example of a strongly regular graph with a non-isomorphic, quantum isomorphic counterpart.
-This section summarizes the main results that lead to this discovery~\cite{schmidt2022quantumisomorphicstronglyregular}.
-
-\begin{definition}
-    The $E_8$ root system $\Psi_{E_8}$ consists of the $112 + 128 = 240$ vectors in $\mathbb{R}^8$, being of the form
-    \begin{align}
-    \pm e_i \pm e_j,~\forall 1 \leqslant i < j \leqslant 8, \quad x = (x_1, \dots, x_8) \textrm{ with } x_i \in \{\pm1\} \textrm{ and } \prod_{i=1}^8 = 1.
-    \end{align}
-    It is a spherical $(2, 2)$-design denoted as ST37 in~\cite{HUGHES202184}, which is the name of its automorphism group
-    in the classification of finite unitary reflection groups by Shephard and Todd. %~\cite{}
-\end{definition}
-
-From this root system, we construct the orthogonality graph $G_{E_8}$ as follows.
-Let $V(G_{E_8}) := \{v_x~|~x \in \Psi_{E_8}, x \equiv -x\}$ and $E(G_{E_8}) := \{ (v_x, v_y)~|~\langle x, y\rangle = 0\}$.
-This graph is strongly regular with parameters $(120, 63, 30, 36)$.
-
-Describing the central type subgroup $L \subseteq \textrm{Aut}(G_{E_8})$ with coisotropic stabilizers
-requires the definition of the real Pauli matrices.
-\begin{definition}
-    The real Pauli matrices are defined to be the following matrices:
-    \begin{align}
-        I = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}, \quad
-        X = \begin{pmatrix}0 & 1 \\ 1 & 0\end{pmatrix}, \quad
-        Z = \begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix}, \quad
-        Y = XZ.
-    \end{align}
-\end{definition}
-Recall that the relations $X^\dagger = X,~Z^\dagger = Z,~Y^\dagger = -Y,~X^2 = Y^2 = Z^2 = I$ hold.
-Note also that from these relations it follows that $X$ and $Z$ anticommute, i.e. $XZ = -ZX$.
-We will use these facts to show the following theorem.
-
-\begin{theorem}
-    The matrices $M := M_0 \otimes M_1 \otimes M_2$ with $M_i \in \{I,X,Y,Z\}$ induce automorphisms
-    $\sigma_M : V(G_{E_8}) \rightarrow V(G_{E_8}),~v_x \mapsto v_{Mx}$
-    which form a subgroup $L \cong \mathbb{Z}_2^6$ of $\textrm{Aut}(G_{E_8})$.
-\end{theorem}
-
-\begin{proof}
-    We first show $\sigma_M \in \textrm{Aut}(G_{E_8})$.
-    
-    Note that due to the identification $v_x = v_{-x}$ for vectors $x \in \Psi_{E_8}$,
-    the $ZX$ and $XZ$ as tensor factors will be identified as the same when considering automorphisms of $G_{E_8}$,
-    therefore each tensor term yields the group structure of $\mathbb{Z}_2^2$.
-    Moreover, since each tensor factor is independent of the other, we get $L \cong (\mathbb{Z}_2^2)^3 \cong \mathbb{Z}_2^6$.
-    
-\end{proof}
-
-
-Furthermore, the action of $L$ partitions the vertex set of $G_{E_8}$ into 15 orbits of size 8, where each orbit comprises of a clique.
+% \subsection{Strongly Regular Graphs from the $E_8$ Root System}
 
 
 % Main source~\cite{schmidt2022quantumisomorphicstronglyregular}
@@ -109,3 +137,4 @@ Furthermore, the action of $L$ partitions the vertex set of $G_{E_8}$ into 15 or
 %     and use projections onto $e_0^{(j)}$ together with automorphisms mapping $e_i^{(j)}$ onto $e_{i+1}^{(j)}$
 %     to get a magic unitary. 
 % }
+\todo[inline]{}

@@ -1,7 +1,7 @@
 \section{Preliminaries}
+\todo{todo}
 
-\jvinline{Notation, QIC background etc.}
-
+\todo[inline]{}
 \subsection{Non-Local Games}
 
 \begin{figure}
@@ -161,22 +161,104 @@ independent of the parameter choice.
 % \jvinline{
 %     Main point: Non-planar graphs yield BCS with quantum advantage
 % }
-
+\todo[inline]{}
 \subsubsection{The Graph Isomorphism Game}
-\jvinline{
-    Define the game, define the notion of
-    quantum isomorphisms via this game.
-}
 
-\subsection{Quantum Isomorphisms}
+In similar fashion, we may define the following
+non-local game based on graphs.
 
-\jvinline{
-    Einordnung:
+\begin{definition}
+    Let $G, H$ be graphs. The $(G, H)$-isomorphism game (or graph isomorphism game)
+    is the non-local game defined by the following rules:
     \begin{itemize}
-        \item Explain $\cong~\subset~\cong_q~\subset~\cong_{qc}~\subset~\cong_{ns}$ (at least that $\cong~\subsetneq~\cong_q$)
-        \item (Quantum isomorphisms correspond to central type subgroups of Aut-group with coisotropic stabilizers)
-        \item (Graphs that have the same hom-count to planar graphs are quantum isomorphic)
+        \item Alice and Bob both receive vertices $v_A, v_B \in V(G)$
+        \item They have to answer with vertices $w_A, w_B \in V(H)$
+        \item The game is won if $\textrm{rel}(v_A, v_B) = \textrm{rel}(w_A, w_B)$,
+        where 
+        \[ \textrm{rel}:~V(\Gamma) \times V(\Gamma)~\rightarrow~\{ =, \sim, \not \sim \} \]
+        denotes the adjacency relation between two vertices of some graph $\Gamma$.
     \end{itemize}
-}
+\end{definition}
 
+Based on this, we may define the notion of a quantum isomorphism between graphs.
+\begin{definition}
+    Two graphs $G, H$ are said to be \emph{quantum isomorphic},
+    denoted $G \cong_q H$, if there exists a perfect quantum
+    strategy for the $(G, H)$-isomorphism game.
+\end{definition}
+\begin{remark}
+    An immediate observation from those definitions is that the game can be won perfectly
+    when there is a graph isomorphism $\varphi:~G \xrightarrow{\sim} H$ between both graphs,
+    since a perfect (classical) strategy can be constructed by
+    applying this isomorphism, i.e. by choosing $w_A = \varphi(v_A)$
+    and $w_B = \varphi(v_B)$. Thus we have
+    \[ G \cong H \implies G \cong_q H. \]
+    Interestingly, the converse is not true.
+    As we will see repeatedly, there exist pairs of graphs 
+    which are quantum isomorphic yet non-isomorphic.
+    These pairs of graphs are the main object of study in this work 
+    and to this date, very few examples of these are known.
+    Throughout this work, we will simply call such graph pairs 
+    \emph{quantum isomorphic} and implictly assume
+    that they are non-isomorphic, unless stated otherwise.
+\end{remark}
 
+There are many alternative definitions of graphs being quantum isomorphic
+to each other, some of which are more helpful for the explicit
+construction of such graph pairs.
+Below we give a condition which is stated purely in graph theoretical terms.
+\begin{definition}\emph{\textbf{\cite{Wang_1998}}}
+Let $\mathcal{A}$ be a unital $C^*$-algebra. A \emph{magic unitary}
+(or quantum permutation matrix) is a matrix $u \in M_n(\mathcal{A})$
+whose entries are projections in $\mathcal{A}$, i.e.
+$\forall i,j \in \{1,\dots, n\}:~u_{ij} = u_{ij}^* = u_{ij}^2$, and furthermore
+\[ \forall i \in \{1,\dots, n\}:~\sum_k u_{ik} = \sum_k u_{ki} = \mathbf{1}_\mathcal{A} \]
+\end{definition}
+\begin{remark}
+    Note that this definition generalizes the notion of
+    a permutation matrix, since the definitions coincide for 
+    the special case $\mathcal{A} = \mathbb{C}$
+    (here the set of projections is just $\{0,1 \}$).
+\end{remark}
+
+\begin{definition}
+    Let $G, H$ be graphs. $G$ and $H$ are quantum isomorphic iff
+    there exists a unital $C^*$-algebra $\mathcal{A}$ and
+    a magic unitary $u \in M_n(\mathcal{A})$ such that 
+    \[ A_G u = u A_H, \]
+    where $A_G$ and $A_H$ are the adjacency matrices of $G$ and $H$ respectively.
+\end{definition}
+\begin{remark}
+    Continuing the previous remark, we see that the special case 
+    $\mathcal{A} = \mathbb{C}$ translates to quantum isomorphisms
+    being equivalent to classical isomorphisms, as the adjacency
+    matrices of classically isomorphic graphs are conjugate
+    under some permutation, represented by a permutation matrix.
+
+    Moreover, the unital $C^*$-algebras appearing in our discussion about
+    quantum isomorphic graph pairs will all be of the form
+    $\mathcal{A} = M_n(\mathbb{C})$ for some $n > 1$.
+\end{remark}
+
+Another way of characterizing quantum isomorphisms of a fixed graph 
+is done in more group-theoretic terms.
+See~\cite{Musto_2018} on details about the algebraic theory
+behind quantum isomorphisms.
+
+\begin{lemma}
+    \emph{\textbf{\cite[Corollary 4.15]{Musto_2018}}}
+Let $G$ be a graph with no (non-classical) quantum automorphisms.
+Then there is a bijection between 
+\begin{itemize}
+    \item Isomorphism classes of graphs $G'$ quantum-isomorphic to $G$
+    \item Conjugacy classes of central type subgroups $(L, \psi) \subseteq \textrm{Aut}(G)$ with coisotropic stabilizers.
+\end{itemize}
+\end{lemma}
+\begin{remark}
+    Central type subgroups have a deep representation-theoretic description,
+    which exceeds the scope of this work.
+    The most prominent examples of central type subgroups appearing
+    in the context of quantum isomorphisms are
+    $\mathbb{Z}_n \times \mathbb{Z}_n$ for some integer
+    $n \in \mathbb{N}$. 
+\end{remark}

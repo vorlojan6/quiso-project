@@ -44,13 +44,13 @@ the Magic Square Game, which is why the players can exploit their
 shared quantum state to win with absolute certainty.
 
 Since the original proof of the Kochen-Specker theorem,
-a number of such configurations were found, in different Hilbert Spaces
+a number of such configurations were found, in different Hilbert spaces
 and with different numbers of rays.
 Therefore, in order to reference all those configurations
 sharing this special property, the following term was coined.
 \begin{definition}
     A \emph{Kochen-Specker Set} $S$ is a configuration of
-    rays in some Hilbert Space which have no hidden-variable labelling and
+    rays in some Hilbert space which have no hidden-variable labelling and
     therefore give a proof of the Kochen-Specker theorem.
 \end{definition}
 Naturally, the smaller, simpler or more symmetric a
@@ -106,7 +106,7 @@ Yet, as pointed out in~\cite{ZIMBA1993697}, the graphs are not isomorphic,
 as any subgraph of $Q$ with vertex count 10 must contain an edge, while this 
 is not the case for $Q^*$.
 
-Next, we see that especially the last property suggests the existence of a quantum isomorphism between $Q$ and $Q^*$.
+Next, we see that these properties suggests the existence of a quantum isomorphism between $Q$ and $Q^*$.
 \begin{lemma}
     Quantum isomorphisms preserve the parameters of strongly regular graphs.
 \end{lemma}
@@ -138,9 +138,17 @@ Next, we see that especially the last property suggests the existence of a quant
 To strengthen the hypothesis that, if existent,
 the quantum isomorphism maps between the pair of graphs $(Q, Q^*)$
 and not to some other graph in $\textsf{SRG}(40, 12, 2, 4)$,
-we make use of~\cite[Theorem 7.16]{mančinska2019quantumisomorphismequivalentequality}.
-This theorem states that quantum isomorphic graphs admit
+we make use of a result stating that quantum isomorphic graphs admit
 the same number of homomorphism counts from any planar graph.
+\begin{theorem}
+    \emph{\textbf{\cite[Theorem 7.16]{mančinska2019quantumisomorphismequivalentequality}}}
+    Let G and H be graphs. Then the following are equivalent:
+    \begin{itemize}
+        \item $G \cong_q H$, i.e. there is a perfect quantum strategy for the $(G, H)$-isomorphism game;
+        \item $G$ and $H$ admit the same number of homomorphisms from any planar graph.
+    \end{itemize}
+    
+\end{theorem}
 
 By iterating over all graphs in $\textsf{SRG}(40, 12, 2, 4)$
 (of which only 28 exist, see the classification in~\cite{Spence2000}),
@@ -148,7 +156,9 @@ and choosing a suitable planar graph $H$, we may divide those
 28 graphs into classes containing 
 graphs with the same homomorphism count.
 
-From those 28 graphs, only $Q$ and $Q^*$ have 40 4-cliques,
+Straightforward computation shows that from those 28 graphs,
+only $Q$ and $Q^*$ have 40 4-cliques
+(corresponding to the vertices of the respective other graph),
 while the other graphs have at most 24.
 Thus, taking $H$ to be $K_4$, the complete graph on 4 vertices,
 we may directly compute the homomorphism count
