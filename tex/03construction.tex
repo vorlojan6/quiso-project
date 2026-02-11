@@ -1,5 +1,4 @@
-\section{Examples of Quantum Isomorphic Graphs}
-
+\section{Known Examples of Quantum Isomorphic Graphs}
 In this section we give a survey on known examples of
 quantum isomorphic graphs.
 We start by showing that the magic square game
@@ -7,38 +6,84 @@ gives quantum isomorphic pairs of graphs and continue
 with more a general construction, which does not involve 
 binary constraint games.
 
-\subsection{Quantum Isomorphic Graphs from the Magic Square Game}
+\subsection{Quantum Isomorphic Graphs from the Mermin-Peres Magic Square Game}
+
+It is well-known that one can construct graphs $G_\mathcal{F}$ and $G_{\mathcal{F}_0}$
+based on any linear binary constraint system game $\mathcal{F}$,
+such that the optimal quantum strategy directly translates to a graph isomorphism between $G_\mathcal{F}$ and $G_{\mathcal{F}_0}$,
+as demonstrated in~\cite{atserias2017quantumnonsignallinggraphisomorphisms}.
+In particular, we summarize this reduction for the magic square game, which falls under this class of non-local games.
+
+First, note that each constraint coming determining the product of entries over a row or column,
+say $x_1 x_2 x_3 = 1$, can be translated to constraints modulo two on the exponents,
+namely $z_1 \oplus z_2 \oplus z_3 = 0$, when we write $x_i = (-1)^{z_i}$.
+Considering those exponents, we construct a graph $G_\mathcal{F}$ with vertices $(\ell, f)$
+coming from valid assignments $f$ for those additive constraints $C_\ell$.
+For example, $(z_1 \oplus z_2 \oplus z_3 = 0, \mathbf{101}) \in V(G_\mathcal{F})$
+while $(z_1 \oplus z_2 \oplus z_3 = 0, \mathbf{001}) \not \in V(G_\mathcal{F})$.
+%
+Next, two vertices in $G_\mathcal{F}$ are adjacent when the assignments are inconsistent, meaning that 
+the assignment of the shared value is different. For example,
+\[ \left((z_1 \oplus z_2 \oplus z_3 = 0, \mathbf{101}), (z_1 \oplus z_4 \oplus z_7 = 1, \mathbf{010})\right) \in E(G) \]
+as the shared value $z_1$ is inconsistent.
+
+For the other graph $G_{\mathcal{F}_0}$, we consider the homogenization $\mathcal{F}_0$ of the magic square game, which is obtained by setting 
+the right-hand side of all constraints $\ell$ to zero. 
+The adjacency rules for $G_{\mathcal{F}_0}$ remain the same as for $G_\mathcal{F}$.
+%
+Note that by construction, the graph $G_{\mathcal{F}_0}$ has an independent set of size six,
+as the all-zero assignment is valid and consistent for any row and column,
+which means that the corresponding six vertices are all non-adjacent to each other.
+%
+The statement that $G_\mathcal{F}$ and $G_{\mathcal{F}_0}$ are quantum isomorphic
+but non-isomorphic follows from the two theorems below, which state 
+the reductions from optimal classical strategies to classical isomorphisms
+and optimal quantum strategies to quantum isomorphisms of the corresponding graphs.
+\begin{theorem}~\cite{atserias2017quantumnonsignallinggraphisomorphisms}.
+    Let $\mathcal{F}$ be a linear binary constraint system game with $m$ constraints.
+    Then the following are equivalent:
+    \begin{itemize}
+        \item $\mathcal{F}$ is satisfiable;
+        \item The graphs $G_\mathcal{F}$ and $G_{\mathcal{F}_0}$ are isomorphic;
+        \item $\alpha(G_\mathcal{F}) = m$.
+    \end{itemize}
+\end{theorem}
+%
+\begin{theorem}~\cite{atserias2017quantumnonsignallinggraphisomorphisms}.
+    Let $\mathcal{F}$ be a linear binary constraint system game with $m$ constraints.
+    Then the following are equivalent:
+    \begin{itemize}
+        \item $\mathcal{F}$ is quantum satisfiable;
+        \item The graphs $G_\mathcal{F}$ and $G_{\mathcal{F}_0}$ are quantum isomorphic;
+        \item $\alpha_q(G_\mathcal{F}) = m$.
+    \end{itemize}
+\end{theorem}
+When we choose $\mathcal{F}$ to be the magic square game,
+we deduce that $G_\mathcal{F}$ and $G_{\mathcal{F}_0}$
+are quantum isomorphic, yet non-isomorphic graphs, as there is an optimal quantum strategy but no 
+optimal classical strategy for $\mathcal{F}$.
 
 
-
-\subsection{Quantum Isomorphic Strongly Regular Graphs from the $E_8$ Root System}
+\subsection{Quantum Isomorphic Strongly Regular Graphs from the $E_8$ Root System~\cite{schmidt2022quantumisomorphicstronglyregular}}
 
 We continue our survey with the only known example of a
 strongly regular graph with a non-isomorphic, quantum isomorphic counterpart.
-This section summarizes the main results that lead to this
-discovery.
-See~\cite{schmidt2022quantumisomorphicstronglyregular} for further details.
-
+This section summarizes the main results that lead to its discovery in~\cite{schmidt2022quantumisomorphicstronglyregular}.
 \begin{definition}
-    The $E_8$ root system $\Psi_{E_8}$ consists of the $112 + 128 = 240$ vectors in $\mathbb{R}^8$, being of the form
-    \begin{align}
-    \pm e_i \pm e_j,~\forall 1 \leqslant i < j \leqslant 8, \quad x = (x_1, \dots, x_8) \textrm{ with } x_i \in \{\pm1\} \textrm{ and } \prod_{i=1}^8 = 1.
-    \end{align}
-    It is a spherical $(2, 2)$-design denoted as ST37 in~\cite{HUGHES202184}, which is the name of its automorphism group
-    in the classification of finite unitary reflection groups by Shephard and Todd. %~\cite{}
+    The $E_8$ root system $\Psi_{E_8}$ consists of the $112 + 128 = 240$ vectors in $\mathbb{R}^8$, being one of the following:
+    \begin{enumerate}
+        \item $|x \rangle = \pm |e_i\rangle \pm |e_j\rangle$, for all $1 \leq i < j \leq 8$, or
+        \item $|x\rangle = (x_1, \dots, x_8) \textrm{ with } x_i \in \{\pm1\} \textrm{ and } \prod_{i=1}^8 = 1$.
+    \end{enumerate}
 \end{definition}
-
 From this root system, we construct the orthogonality graph $G_{E_8}$ as follows.
-Let $V(G_{E_8}) := \{v_x~|~x \in \Psi_{E_8}, x \equiv -x\}$ and $E(G_{E_8}) := \{ (v_x, v_y)~|~\langle x, y\rangle = 0\}$.
+Let $V(G_{E_8}) := \{v_x:|x\rangle \in \Psi_{E_8}, |x\rangle \equiv -|x\rangle\}$ and $E(G_{E_8}) := \{ (v_x, v_y):\langle x, y\rangle = 0\}$.
 This graph is strongly regular with parameters $(120, 63, 30, 36)$.
-
-% Describing the central type subgroup $L \subseteq \textrm{Aut}(G_{E_8})$ with coisotropic stabilizers
-% requires the definition of the real Pauli matrices.
-
+%
 Below we recall the notion of real Pauli matrices, as these will be used 
 to describe certain automorphisms of $G_{E_8}$.
 \begin{definition}
-    The real Pauli matrices are defined to be the following matrices:
+    The real (qubit) Pauli matrices are defined to be the following matrices:
     \begin{align}
         I = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}, \quad
         X = \begin{pmatrix}0 & 1 \\ 1 & 0\end{pmatrix}, \quad
@@ -46,69 +91,143 @@ to describe certain automorphisms of $G_{E_8}$.
         Y = XZ.
     \end{align}
 \end{definition}
-Recall that the relations $X^\dagger = X,~Z^\dagger = Z,~Y^\dagger = -Y,~X^2 = Y^2 = Z^2 = I$ hold.
+Recall the relations $X^\dagger = X,~Z^\dagger = Z,~Y^\dagger = -Y,~X^2 = Y^2 = Z^2 = I$.
 Note also that from these relations it follows that $X$ and $Z$ anticommute, i.e. $XZ = -ZX$.
 We will use these facts to show the following theorem.
-
 \begin{theorem}
-    The matrices $M := M_0 \otimes M_1 \otimes M_2$ with $M_i \in \{I,X,Y,Z\}$ induce automorphisms
+    The 3-qubit Pauli matrices $M := M_0 \otimes M_1 \otimes M_2$ with $M_i \in \{I,X,Y,Z\}$ induce automorphisms
     $\sigma_M : V(G_{E_8}) \rightarrow V(G_{E_8}),~v_x \mapsto v_{Mx}$
-    which form a subgroup $L \cong \mathbb{Z}_2^6$ of $\textrm{Aut}(G_{E_8})$.
+    which form a subgroup $L \cong \mathbb{Z}_2^6$ of $\operatorname{Aut}(G_{E_8})$.
 \end{theorem}
-
 \begin{proof}
-    We first show $\sigma_M \in \textrm{Aut}(G_{E_8})$.
-    
+    In order to show $\sigma_M \in \operatorname{Aut}(G_{E_8})$, we observe that
+    the generators $I\otimes I \otimes X, I\otimes I \otimes Z$,
+    $I\otimes X \otimes I$, $I\otimes Z \otimes I$, $X\otimes I \otimes I$, $Z\otimes I \otimes I$
+    are signed permutation matrices, flipping an even number of signs.
+    As this preserves the defining properties of begin a root vector of $E_8$, 
+    and any element $M \in L$ is a product of these generators, we deduce 
+    that $M \in \operatorname{Aut}(G_{E_8})$.
+    %
     Note that due to the identification $v_x = v_{-x}$ for vectors $x \in \Psi_{E_8}$,
-    the $ZX$ and $XZ$ as tensor factors will be identified as the same when considering automorphisms of $G_{E_8}$,
-    therefore each tensor term yields the group structure of $\mathbb{Z}_2^2$.
+    the anti-commuting property $ZX = \pm XZ$ descends to equality of automorphisms in $L$.
+    As furthermore $X^2 = Z^2 = I$, we get $\{ \sigma_I, \sigma_X, \sigma_Z, \sigma_{XZ} \} \cong \mathbb{Z}_2^2$ for each tensor term.
     Moreover, since each tensor factor is independent of the other, we get $L \cong (\mathbb{Z}_2^2)^3 \cong \mathbb{Z}_2^6$.
-    
 \end{proof}
-
-
-Furthermore, the action of $L$ partitions $V(G_{E_8})$
+Next we show that two vertices $v_x, v_{y} \in V_i$ have the same stabilizers under $L$.
+\begin{lemma}
+    If there exists $\sigma_M \in L$ such that $v_y = \sigma_M(v_x)$, 
+    then $\operatorname{stab}_L(v_x) = \operatorname{stab}_L(v_y)$.
+\end{lemma}
+\begin{proof}
+    Since we have $|y\rangle = \pm M|x\rangle$ and $N|x\rangle = \pm |x\rangle~\forall N \in \operatorname{stab}_L(v_x)$,
+    we see that 
+    \[ N|y\rangle = \pm NM|x\rangle = \pm MN|x\rangle = \pm M|x\rangle = \pm |y\rangle, \]
+    since any two elements $M, N \in L$ either commute or anticommute.
+    As vertices identify the vectors up to a sign, we conclude $\sigma_N \in \operatorname{stab}_L(v_y)$.
+\end{proof}
+Moreover, the action of $L$ partitions $V(G_{E_8})$
 into 15 orbits of size 8, where each orbit comprises of a clique, 
 or equivalently of a orthonormal basis in the $E_8$ root system.
+We denote these orbits as $V_i$, for $i \in \{1,\dots, 15 \}$.
+Furthermore, the stabilizer subgroups of each orbit, $\operatorname{stab}_L(V_i)$,
+are isomorphic to $\mathbb{Z}_2^3$, with the intersection
+of the stabilizer subgroups of two orbits being isomorphic to $\mathbb{Z}_2$.
 
-\todo{continue here}
-
-
-
-\todo[inline]{}
-\section{Quantum-Isomorphic Strongly Regular Graphs from Spherical Designs}
-
-A more recent approach to find quantum isomorphisms comes 
-from the study of spherical designs.
-As these spherical designs are highly symmetric,
-their orthogonality graphs are strongly regular.
-Furthermore, geometric conditions for quantum symmetry of
-such graphs have been found, allowing to translate this
-problem into one of representation theoretic nature.
-We start by discussing the first and (up to date) only known pair
-of strongly regular graphs, and continue to evaluate other potential candidates.
-
-\begin{definition}
-    A \emph{spherical design} is something cool.
-\end{definition}
-
-
+Using these facts, it is shown that there is an induced magic unitary for $G_{E_8}$, coming from 
+the action of $L$. For this, we choose distinguished vertices $\omega^{(i)} \in V_i$
+and define projections onto the associated vectors to each orbit. 
 \begin{lemma}
-Let $\Gamma$ be a graph with no quantum symmetries.
-Then there is a bijection between 
-\begin{itemize}
-    \item Isomorphism classes of graphs $\Gamma'$ quantum-isomorphic to $\Gamma$
-    \item Central type subgroups $(L, \psi) \subseteq \textrm{Aut}(\Gamma)$ with coisotropic stabilizers,
-    up to conjugation.
-\end{itemize}
+    Denote $P_x := \frac{1}{||x||^2} |x\rangle \langle x|$ as the rank-one projection onto
+    some root vector $|x\rangle \in \Psi_{E_8}$, and for root vectors $y, z \in \Psi_{E_8}$,
+    let $M_{yz} \in L$ be the matrix under which $y \mapsto \pm z$.
+    Define $u^{(i)}_{v_y v_z} = M_{yz} P_{\omega^{(i)}} M_{yz}^* = P_{M_{yz} \omega^{(i)}}$
+    and form blocks $u^{(i)} = (u^{(i)}_{v_y v_z})_{v_y, v_z \in V_i}$.
+    Then the block diagonal matrix 
+    \begin{align}
+        u = \begin{pmatrix}
+        u^{(1)} & 0 & 0 & \dots & 0\\
+        0 & u^{(2)} & 0 & \dots & 0\\
+        0 & 0 & u^{(3)} & \dots & 0\\
+        \vdots & \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & 0 & \dots & u^{(15)} \\
+        \end{pmatrix}
+    \end{align}
+    is a magic unitary.
 \end{lemma}
+% \begin{proof}
+%     Note that each block
+% \end{proof}
+Next, the procedure
+is to choose distinguished vertices $\omega^{(i)} \in V_i$,
+and show that fixing the disjoint cliques $V_i$ and
+changing the adjacencies between cliques $V_i$ and $V_j$
+based on the adjacencies between $\omega^{(i)}$ and $\omega^{(j)}$ results
+in a quantum isomorphic, non-isomorphic graph $G^{\omega}$,
+which is uniquely determined up to the isomorphism coming from
+different choices of $\omega^{(i)}$.
+
+We start by defining the graph $G^{\omega}$.
+\begin{definition}\label{def:gw}
+    For $\omega = \{ \omega^{(1)}, \dots, \omega^{(15)} \}$ be 
+    the set of some chosen vectors, for which $v_{\omega^{(i)}} \in V_i$ for each orbit under $L$.
+    Then, the graph $G^{\omega}$ is constructed by setting $V(G^{\omega}) = V(G_{E_8})$
+    and switching the edges of $G_{E_8}$ as follows:
+    \begin{itemize}
+        \item If $\langle \omega^{(i)}, \omega^{(j)} \rangle \neq 0$,
+        we copy the edges from $G_{E_8}$, i.e. we define
+        $(s, t) \in E(G^\omega) \iff (s, t) \in E(G_{E_8})$
+        for $s \in V_i$, $t \in V_j$.
+        \item If $\langle \omega^{(i)}, \omega^{(j)} \rangle = 0$,
+        we switch the adjacency rules from $G_{E_8}$, i.e. 
+        $(s, t) \in E(G^\omega) \iff (s, t) \not \in E(G_{E_8})$
+        for $s \in V_i$, $t \in V_j$.
+    \end{itemize}
+\end{definition}
+Note that this procedure essentially preserves the 8-cliques
+making up the orbits $V_i$ under $L$ and switches the adjacency relations 
+between those cliques, such that $\omega$ becomes an independent set of size $15$, already showing that
+$G^\omega \not \cong G_{E_8}$.
+
+Moreover, even though the construction of $G^\omega$ involved making a choice on $\omega$, 
+it is true that two different sets $\omega$ and $\omega'$ yield graphs
+$G^\omega$, $G^{\omega'}$ that are isomorphic to each other.
+
+Finally, the magic unitary $u$ gives a quantum isomorphism between the
+graphs $G_{E_8}$ and $G^\omega$, as is shown by the following lemma.
+\begin{lemma}\label{lem:prod}
+    Let $k, s \in V_i$ and $l, t \in V_j$ with $i \neq j$.
+    \begin{itemize}
+        \item If $d(k, l) = d(s, t)$, we have $u_{ks} u_{lt} = 0$ iff $\langle \omega^{(i)}, \omega^{(j)} \rangle = 0$.
+        \item If $d(k, l) \neq d(s, t)$, we have $u_{ks} u_{lt} = 0$ iff $\langle \omega^{(i)}, \omega^{(j)} \rangle \neq 0$.
+    \end{itemize}
+\end{lemma}
+
+\begin{corollary}
+    The magic unitary defined above induces a quantum isomorphism between $G_{E_8}$ and $G^\omega$.
+\end{corollary}
+\begin{proof}
+    Follows, essentially by construction, from Definition~\ref{def:gw} and Lemma~\ref{lem:prod} that 
+    certain products of $u$ must be zero,
+    combined with the statement from Lemma~\ref{lem:prod2} that the observations from Lemma~\ref{lem:prod}
+    imply a quantum isomorphism.
+\end{proof}
+
+\subsection{Spherical Designs}
+
+The root system $E_8$ is an example of a \emph{spherical design},
+which are dense and highly symmetric configurations of finitely many vectors in some Hilbert space.
+It is therefore reasonable to expect that other spherical designs give quantum
+isomorphic strongly regular graphs similar to the example of $E_8$.
+The examples that are of particular interest for this project are listed in Table~\ref{tab:spherical},
+and were obtained from the search for particularily small spherical designs in~\cite{HUGHES202184}.
+From it, we chose to analyse the 40 vector design in $\mathbb{C}^4$ in more detail in the next section.
 
 \begin{table}
     \centering
     \caption{
         Overview of spherical $(t, t)$-designs and their properties, extended from~\cite{HUGHES202184}.
         The entry in column \emph{Orthogonality Graph} contains the strongly regular graph parameters.
-    }
+    }\label{tab:spherical}
     \resizebox{\textwidth}{!}{
     \begin{tabular}{c|c|c|l|c}
         Name & Description  & Ambient & Automorphism group & Orthogonality graph \\
@@ -118,23 +237,8 @@ Then there is a bijection between
         Coxeter-Todd lattice $\Lambda_6^\omega$ & 126 vector $(3, 3)$-design & $\mathbb{C}^6$ & $ST34 \cong \mathbb{Z}_3 . \Omega_6^- . \mathbb{Z}_2$ & $(126, 45, 12, 18)$ \\
         \hline
         $E_6$ lattice & 36 vector $(2, 2)$-design & $\mathbb{R}^6$ & $ST35 \cong PSU_4(2) . \mathbb{Z}_2$ & $(36, 15, 6, 6)$ \\
-        $E_7$ lattice & 63 vector $(2, 2)$-design & $\mathbb{R}^7$ & $ST36 \cong \mathbb{Z}_2 \times Sp_6(2)$ & $(63, 30, ?, ?)$ \\
+        $E_7$ lattice & 63 vector $(2, 2)$-design & $\mathbb{R}^7$ & $ST36 \cong \mathbb{Z}_2 \times Sp_6(2)$ & $(63, 30, 13, 15)$ \\
         $E_8$ lattice & 120 vector $(2, 2)$-design & $\mathbb{R}^8$ & $ST37 \cong \mathbb{Z}_2 . O_8^+(2)$ & $(120, 63, 30, 36)$ \\
     \end{tabular}}
 \end{table}
 
-% \subsection{Strongly Regular Graphs from the $E_8$ Root System}
-
-
-% Main source~\cite{schmidt2022quantumisomorphicstronglyregular}
-
-% \jvinline{
-%     A different approach, showing that quiso graphs are more general than quantum optimal BCS
-% }
-
-% \jvinline{
-%     Use the fact that $E_8$ contains 15 sets of distinct bases $e_i^{(j)}$ of $\mathbb{R}^8$,
-%     and use projections onto $e_0^{(j)}$ together with automorphisms mapping $e_i^{(j)}$ onto $e_{i+1}^{(j)}$
-%     to get a magic unitary. 
-% }
-\todo[inline]{}

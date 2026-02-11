@@ -1,11 +1,51 @@
 \section{Preliminaries}
-\todo{todo}
 
-\todo[inline]{}
+\subsection{Graph Theory Basics}
+In this report, we consider the structure of finite graphs.
+Therefore, we go by the convention that a graph $G = (V(G), E(G))$ comprises of a
+finite set of vertices $V(G)$ and a set of undirected edges $E(G) \subseteq V(G) \times V(G)$,
+meaning that $(i, j) \in E(G)$ iff $(j, i) \in E(G)$.
+Throughout, we also use the notation $i \sim_G j$ to mean $(i, j) \in E(G)$.
+Furthermore, we omit the graph subscript for this notation, whenever there is no ambiguity.
+
+An independent set of a graph is a subgraph of $G$ containing no edges, 
+and the independence number $\alpha(G)$ is defined to be the vertex count
+of a maximal independent set of $G$.
+
+A homomorphism of two graphs $G, H$ is defined to be a map $\phi : V(G) \rightarrow V(H)$
+such that $i \sim_G j \implies \phi(i) \sim_H \phi(j)$.
+Moreover, two graphs $G$ and $H$ are isomorphic if the above implication is two-sided.
+An automorphism of a graph $G$ is an isomorphism to itself.
+
+A strongly regular graph with with parameters $(n, k, \lambda, \mu)$ is a graph $G$
+with the properties
+\begin{itemize}
+    \item $|V(G)| = n$,
+    \item Each vertex has exactly $k$ neighbours,
+    \item Any two adjacent vertices share exactly $\lambda$ neighbours,
+    \item Any two non-adjacent vertices share exactly $\mu$ neighbours.
+\end{itemize}
+Strongly regular graphs have been one central object of study in algebraic graph theory, 
+see for example~\cite{Brouwer_Van_Maldeghem_2022}, 
+as they lie on the border between structure and disorder and are still poorly understood in general.
+In particular, strongly regular graphs are generally not uniquely determined by their parameters,
+and for some parameter choices there are exponentially many non-isomorphic graphs,
+while for some parameter choices there are none at all.
+
 \subsection{Non-Local Games}
+Non-local games consist of two non-communicating players Alice and Bob, which are given 
+questions $x \in I_A, y \in I_B$ by the referee, to which they must respond with an answer $a \in O_A, b \in O_B$.
+The game is won if the questions and answers fulfill some predefined condition,
+captured by a \emph{verification function}
+\[ V: I_A \times I_B \times O_A \times O_B~\rightarrow~\{0, 1\}, \]
+i.e., if $V(x, y, a, b) = 1$, the game is won.
+The probability for the players to receive questions $x$ and $y$ 
+are modelled via some probability distribution $\pi: I_A \times I_B \rightarrow [0, 1]$,
+which, for simplicity, is generally assumed to be a uniform distribution.
 
-\begin{figure}
+\begin{figure}[t]
     \centering
+    \resizebox{0.35\textwidth}{!}{
     \begin{tikzpicture}
         \node[draw] at (0, 1) (r) {$R$};
         \node[draw] at (-1.5, 0) (a) {$A$};
@@ -16,182 +56,172 @@
         \draw[->] (r) to[out=0,in=90] node[pos=0.5, sloped, above] {\tiny $y \in I_B$} (b);
         \draw[->] (b) to[out=180,in=270] node[pos=0.33, sloped, below] {\tiny $b \in O_B$} (r);
 
-        \draw[thick, latex-latex] (-1.5, -0.5) -- (1.5, -0.5) node[midway, below] {\tiny $|\psi\rangle \in \mathcal{H}_{AB}$};
-    \end{tikzpicture}
+        \draw[thick, latex-latex] (-1.5, -0.5) -- (1.5, -0.5) node[midway, below] {\tiny $|\Psi\rangle$};
+    \end{tikzpicture}}
     \caption{Graphical illustration of how non-local games are played.}
 \end{figure}
-
-Non-local games consist of two non-communicating players $A$ and $B$, which are given 
-questions $x \in I_A, y \in I_B$ by the referee, to which they must respond with an answer $a \in O_A, b \in O_B$.
-The game is won if the questions and answers fulfill some predefined condition,
-captured by a \emph{verification function}
-\[ V: I_A \times I_B \times O_A \times O_B~\rightarrow~\{0, 1\}, \]
-i.e., if $V(x, y, a, b) = 1$, the game is won.
-The probability for the players to receive questions $x$ and $y$ 
-are modelled via some probability distribution $\pi: I_A \times I_B \rightarrow [0, 1]$,
-which, for simplicity, is generally assumed to be a uniform distribution.
-
-The \emph{winning probability} of a non-local game $G$ using a strategy $S$ is defined as
-\[ \omega_S(G) = \sum_{x,y} \pi(x, y) \sum_{a,b} V(x,y,a,b)~p(a,b~|~x,y) \]
-where $p(a,b~|~x,y)$ is the probability for $A$ and $B$ to respond with $a,b$, given questions $x,y$.
-Note that this is the only term that the players
-have control over (by agreeing on a game strategy $S$ beforehand),
-while the other terms are predetermined by the game instance that is played.
-
 The caveat to non-local games is that the players are not allowed to communicate 
-during the game, but are allowed to use (possibly entangled) quantum resources, which are distributed before the game,
-to which they may apply \emph{local} changes (i.e. apply unitaries and measurements on their own share of qubits).
+during the game, but are allowed to use entangled \emph{quantum} resources which are distributed before the game.
+
+We therefore distinguish between two types of strategies, namely classical and quantum strategies.
+We say that Alice and Bob adopt a (deterministic) \emph{classical strategy} if they agree on functions $f_A: I_A \rightarrow O_A$
+and $f_B: I_B \rightarrow O_B$ beforehand, which are applied to their questions during the game.
+In particular, no quantum entanglement is used. 
+On the other hand, in case of a \emph{quantum strategy}, the players agree to apply local question-dependent 
+operations, i.e. unitaries and measurements, onto their share of qudits, 
+and answer depending on the result of some measurement on their share of qudits.
+
+The \emph{winning probability} of a non-local game $G$ for some strategy $S$ is defined as
+\[ \omega_S(G) = \sum_{x,y} \pi(x, y) \sum_{a,b} V(x,y,a,b)~p(a,b|x,y) \]
+where $p(a,b|x,y)$ is the probability for Alice and Bob to respond with $a,b$, given questions $x,y$.
+Note that this is the only term that the players
+have control over, namely by agreeing on a game strategy $S$ beforehand,
+while the other terms are predetermined by the game instance that is played.
+In particular, for classical strategies, we may simplify to
+\[ p(a,b|x,y) = p\left(f_A(x) = a\right) \cdot p\left(f_B(y) = b\right), \]
+while for quantum strategies we may rewrite to
+\[ p(a,b|x,y) = \langle \Psi| P_x(a) \otimes P_y(b) |\Psi\rangle, \]
+where $P_x$ and $P_y$ are some projections parametrized by the received questions.
+It is possible to further generalize to \emph{quantum commuting strategies}, which
+allow Alice and Bob to use global measurements $P_x$ on $|\Psi\rangle$,
+as long as the measurement operators commute. In this case,
+\[ p(a,b|x,y) = \langle \Psi| P_x(a) P_y(b) |\Psi\rangle. \]
+It is known that for finite dimensional Hilbert spaces, to which we restrict our attention in this report,
+the two notions of quantum and quantum commuting stragegies are equivalent.
 %
 Studying non-local games is motivated by a peculiar phenomenon called \emph{quantum advantage},
-describing that the pre-shared quantum resources allow to devise so called \emph{quantum strategies},
-which may achieve higher winning probabilities than \emph{classical strategies},
+describing that the pre-shared quantum resources allow to devise quantum strategies,
+which may achieve higher winning probabilities than classical strategies,
 i.e. strategies that do not utilise these quantum resources.
-%
-Phrased in terms of the \emph{optimal (classical / quantum) winning strategy},
+Phrased in terms of the optimal classical (respectively quantum) winning strategy,
 \begin{align*}
     \omega^*(G) := \sup_{S \textrm{ classical}}~\omega_S(G), & & \omega_q^*(G) := \sup_{S \textrm{ quantum}} \omega_S(G),
 \end{align*}
 there exist non-local games $G$ for which $\omega^*(G) < \omega_q^*(G)$.
 %
-Furthermore, it is known that quantum strategies are \emph{non-signalling}, 
-meaning that the answers of each player are statistically independent of each other,
-defying intuition that some form of information exchange is happening inbetween the players during the game.
+Furthermore, it is known that quantum strategies are non-signalling,
+meaning that the answers of the players are statistically independent of each other,
+defying intuition that during the game, some form of information is exchanged
+via those local operations on the shared entangled pair.
 
 
+\subsubsection{The Mermin-Peres Magic Square Game.}\label{sec:magic-square}
 
+A prominent example of a non-local game was introduced by Mermin and Peres~\cite{PhysRevLett.65.3373}
+and is based on assigning values to a 3 by 3 square.
+\begin{definition}
+    The \emph{magic square game} is a non-local game based on a 3 by 3 grid with entries $x_i \in \{1, -1\}$,
+    such that the product of the $x_i$ over one row must be $1$, while the product over one column must be $-1$.
 
-
-
-
-
-
-\subsubsection{Binary Constraint System Games}
-
-\jvinline{A big class of non-local games are BCS. They are defined as ...}
-
-\jvinline{Famous example: Magic Square}
-
-The most prominent example of a BCS is the Magic Square Game,
-which is parametrized by publicly known values $b_k \in \{ \pm 1\}$.
-The magic square comprises of nine variables $X_i \in \{ \pm 1\}$ aligned in a $3 \times 3$ grid,
-with the requirement that $\prod_{i \in k} X_i = b_k$.
-
+    The non-local game is then defined as follows.
+    The referee asks Alice to fill in some row and Bob to fill in some column.
+    The players win if their assignments are valid and if both players assign the same value to
+    the element contained in the intersection.  
+\end{definition}
 \begin{figure}[h]
     \centering
+    \resizebox{0.35\textwidth}{!}{
     \begin{tikzpicture}
-        \node[] at (0, 0) {
-            $\begin{pmatrix}
-                X_1 & X_2 & X_3 \\
-                X_4 & X_5 & X_6 \\
-                X_7 & X_8 & X_9 
-            \end{pmatrix}$
-            };       
-        \node[] at (1.25, 0.4) {$= b_1$};
-        \node[] at (1.25, 0.025) {$= b_2$};
-        \node[] at (1.25, -0.35) {$= b_3$};
-        \node[rotate=270] at (0.5, -1) {$= b_4$};
-        \node[rotate=270] at (0, -1) {$= b_5$};
-        \node[rotate=270] at (-0.5, -1) {$= b_6$};
-    \end{tikzpicture}
-    \caption{The Magic Square Game.}\label{fig:magic-square}
+        \magicsquare{0}{0}
+        \node[] at (-1, 1) {$x_1$};
+        \node[] at (0, 1) {$x_2$};
+        \node[] at (1, 1) {$x_3$};
+        \node[] at (-1, 0) {$x_4$};
+        \node[] at (0, 0) {$x_5$};
+        \node[] at (1, 0) {$x_6$};
+        \node[] at (-1, -1) {$x_7$};
+        \node[] at (0, -1) {$x_8$};
+        \node[] at (1, -1) {$x_9$};
+        \node[] at (2, 1) {$=1$};
+        \node[] at (2, 0) {$=1$};
+        \node[] at (2, -1) {$=1$};
+        \node[rotate=270] at (1, -2.2) {$= (-1)$};
+        \node[rotate=270] at (0, -2.2) {$= (-1)$};
+        \node[rotate=270] at (-1, -2.2) {$= (-1)$};
+    \end{tikzpicture}}
+    \caption{The Magic square game.}\label{fig:magic-square}
 \end{figure}
 
+Note that it is impossible to find a classical strategy with winning probability one, as it 
+would imply filling out the entire magic square, which is impossible by design.
+To see this, compare the product of all rows to the product of all columns.
+On the one hand, they both compute the product of all entries $\prod_{i = 1}^{9} x_i$ and should
+therefore be equal. On the other hand, $1\cdot 1 \cdot 1 = 1 \neq -1 = (-1) \cdot (-1) \cdot (-1)$,
+giving us the contradiction.
 
-The Magic Square game is now played as follows:
-The referee requests a random row from player A
-and a random column from player B, to which both players must respond
-with a valid assignment of the involved variables.
-The players win the game if and only if their assignments of the overlapping variable agree.
 
-\begin{example}
-    todo
-\end{example}
-\begin{figure}
+However, it is in fact possible to find an optimal quantum strategy, by sharing two qubit pairs in the Bell state,
+i.e. the state 
+\[ |\Psi\rangle = \frac{1}{\sqrt{2}} \left(|0\rangle |0\rangle + |1\rangle|1\rangle \right)_{A_1 B_1} \otimes \frac{1}{\sqrt{2}}\left(|0\rangle |0\rangle + |1\rangle|1\rangle \right)_{A_2 B_2}, \]
+where $|0\rangle = (1, 0)^T$ and $|1\rangle = (0, 1)^T$ are the standard basis vectors of the Hilbert space $\mathbb{C}^2$,
+in which the possible states of a qubit live.
+Now, based on the questions they received, Alice and Bob measure their share of qubits via the observables given
+in~\ref{fig:quantum-magic-square} and label the square entries with the measurement outcomes,
+i.e. with one of the eigenvalues of the observable.
+Since the operators in one row or column commute with each other, they share an eigenbasis,
+and since quantum measurements translate to projections onto eigenspaces of the observable,
+the order of measurement does not affect the outcomes.
+Furthermore, as Alice and Bob share two copies of the Bell state, it means that measuring with 
+the same observable gives the same outcomes for both players, therefore their answers 
+on the intersecting entry always matches. 
+Moreover, the product of the eigenvalues inside one row or column is equal to the eigenvalue
+of their product, which is by design $I\otimes I$ for the rows and $-I\otimes I$ for the columns,
+with eigenvalues $1$ and $-1$ respectively.
+Therefore, the assignment produced by the quantum strategy is valid.
+Lastly, since no probabilities are involved, we get a quantum strategy with a winning probability of one.
+\begin{figure}[h]
     \centering
+    \resizebox{0.35\textwidth}{!}{
     \begin{tikzpicture}
-        \magicsquare{0}{0}        
-        \node[] at (-1, 1)  {\large $\mathbf{-1}$};
-        \node[] at (0, 1)   {\large $\mathbf{1}$};
-        \node[] at (1, 1)   {\large $\mathbf{-1}$};
-        \node[] at (-1, 0)  {\large $\mathbf{1}$};
-        \node[] at (0, 0)   {\large $\mathbf{1}$};
-        \node[] at (1, 0)   {\large $\mathbf{1}$};
-        \node[] at (-1, -1) {\large $\mathbf{1}$};
-        \node[] at (0, -1)  {\large $\mathbf{-1}$};
-        \node[] at (1, -1)  {\large $\mathbf{1}$};
-
-        \node[] at (2, 1) {$= b_1$};
-        \node[] at (2, 0) {$= b_2$};
-        \node[] at (2, -1) {$= b_3$};
-        \node[rotate=270] at (1, -2) {$= b_4$};
-        \node[rotate=270] at (0, -2) {$= b_5$};
-        \node[rotate=270] at (-1, -2) {$= b_6$};
-    \end{tikzpicture}
+        \magicsquare{0}{0}
+        \node[] at (-1, 1) {\tiny $I \otimes Z$};
+        \node[] at (0, 1) {\tiny $Z \otimes I$};
+        \node[] at (1, 1) {\tiny $Z \otimes Z$};
+        \node[] at (-1, 0) {\tiny $X \otimes I$};
+        \node[] at (0, 0) {\tiny $I \otimes X$};
+        \node[] at (1, 0) {\tiny $X \otimes X$};
+        \node[] at (-1, -1) {\tiny $-X \otimes Z$};
+        \node[] at (0, -1) {\tiny $-Z \otimes X$};
+        \node[] at (1, -1) {\tiny $Y \otimes Y$};
+        \node[] at (2, 1) {\tiny $=I \otimes I$};
+        \node[] at (2, 0) {\tiny $=I \otimes I$};
+        \node[] at (2, -1) {\tiny $=I \otimes I$};
+        \node[rotate=270] at (1, -2.2) {\tiny $= -I \otimes I$};
+        \node[rotate=270] at (0, -2.2) {\tiny $= -I \otimes I$};
+        \node[rotate=270] at (-1, -2.2) {\tiny $= -I \otimes I$};
+    \end{tikzpicture}}
+    \caption{An optimal quantum strategy to the magic square game.}\label{fig:quantum-magic-square}
 \end{figure}
 
-Note that this game is parametrized by the choice
-of values $b_k$, which impacts the success of classical strategies for this game.
-While an all-one assignment $b_k = 1,~\forall k$ allows
-the trivial strategy (always respond with $X_i = 1$) to succeed with certainty,
-it is possible to choose parameters $\{b_k\}_k$, for which no optimal classical strategy exists.
+\subsubsection{The Graph Isomorphism Game.}
 
-\begin{lemma}
-    The Magic Square game with parameters as in~\ref{} % $b_1 = b_2 = ... = b_5 = +1$, $b_6 = -1$
-    has no optimal classical strategy.
-\end{lemma}
-\begin{proof}
-    todo.
-\end{proof}
-
-Interestingly, there do exist optimal quantum strategies for the Magic Square game,
-independent of the parameter choice.
-\begin{lemma}
-    The quantum strategy given by (todo) is an optimal strategy for the Magic Square game.
-\end{lemma}    
-\begin{proof}
-    todo.
-\end{proof}
-    
-
-
-
-% \subsubsection{Arkhipov's Construction of BCS}
-% Main source~\cite{arkhipov2012extendingcharacterizingquantummagic}
-% \jvinline{Intersection Graphs}
-% \jvinline{
-%     Main point: Non-planar graphs yield BCS with quantum advantage
-% }
-\todo[inline]{}
-\subsubsection{The Graph Isomorphism Game}
-
-In similar fashion, we may define the following
-non-local game based on graphs.
-
+% After having seen the 
+We define another non-local game, which is based on graph isomorphisms.
 \begin{definition}
-    Let $G, H$ be graphs. The $(G, H)$-isomorphism game (or graph isomorphism game)
+    Let $G, H$ be graphs with the same number of vertices.
+    The $(G, H)$-isomorphism game (or graph isomorphism game)
     is the non-local game defined by the following rules:
     \begin{itemize}
         \item Alice and Bob both receive vertices $v_A, v_B \in V(G)$
         \item They have to answer with vertices $w_A, w_B \in V(H)$
-        \item The game is won if $\textrm{rel}(v_A, v_B) = \textrm{rel}(w_A, w_B)$,
+        \item The game is won if $\textrm{rel}_G(v_A, v_B) = \textrm{rel}_H(w_A, w_B)$,
         where 
-        \[ \textrm{rel}:~V(\Gamma) \times V(\Gamma)~\rightarrow~\{ =, \sim, \not \sim \} \]
+        \[ \textrm{rel}_\Gamma:~V(\Gamma) \times V(\Gamma)~\rightarrow~\{ =, \sim, \not \sim \} \]
         denotes the adjacency relation between two vertices of some graph $\Gamma$.
     \end{itemize}
 \end{definition}
-
-Based on this, we may define the notion of a quantum isomorphism between graphs.
+Based on this definition, we further define the notion of a quantum isomorphism between graphs.
 \begin{definition}
-    Two graphs $G, H$ are said to be \emph{quantum isomorphic},
+    Two graphs $G, H$ with the same number of vertices are said to be \emph{quantum isomorphic},
     denoted $G \cong_q H$, if there exists a perfect quantum
     strategy for the $(G, H)$-isomorphism game.
 \end{definition}
 \begin{remark}
-    An immediate observation from those definitions is that the game can be won perfectly
-    when there is a graph isomorphism $\varphi:~G \xrightarrow{\sim} H$ between both graphs,
-    since a perfect (classical) strategy can be constructed by
-    applying this isomorphism, i.e. by choosing $w_A = \varphi(v_A)$
-    and $w_B = \varphi(v_B)$. Thus we have
+    An immediate observation from those definitions is that the game 
+    has an optimal classical strategy when the graphs $G$ and $H$ are isomorphic,
+    as applying this isomorphism gives such a strategy.
+    Since the quantum strategy of simply ignoring the quantum resources and employing
+    this classical strategy is already optimal, we have
     \[ G \cong H \implies G \cong_q H. \]
     Interestingly, the converse is not true.
     As we will see repeatedly, there exist pairs of graphs 
@@ -202,17 +232,41 @@ Based on this, we may define the notion of a quantum isomorphism between graphs.
     \emph{quantum isomorphic} and implictly assume
     that they are non-isomorphic, unless stated otherwise.
 \end{remark}
-
-There are many alternative definitions of graphs being quantum isomorphic
-to each other, some of which are more helpful for the explicit
-construction of such graph pairs.
-Below we give a condition which is stated purely in graph theoretical terms.
+There are many alternative definitions of a quantum isomorphism between graphs,
+some of which are more helpful for the explicit construction of those graph pairs.
+Moreover, the language describing quantum strategies for the $(G, H)$-graph isomorphism game
+is based on $C^*$-algebras, which we define next.
+\begin{definition}
+    A normed algebra $\mathcal{A}$ is an associative algebra over $\mathbb{C}$
+    equipped with a norm $||\cdot ||:\mathcal{A} \rightarrow \mathbb{R}_{\geq 0}$.
+    A Banach algebra is a complete normed algebra, i.e. one in which every Cauchy sequence converges.
+    Lastly, a $C^*$-algebra $\mathcal{A}$ is a Banach algebra with an involution
+    $ ^* : \mathcal{A} \rightarrow \mathcal{A}$ such that for any $x, y \in \mathcal{A}$,
+    \begin{itemize}
+        \item $x^{**} = x$,
+        \item $(x+y)^{*} = x^* + y^*$,
+        \item $(xy)^{*} = y^* x^*$,
+        \item $(\lambda x)^* = \bar{\lambda} x^*$
+        \item $||x^* x || = ||x||^2$.
+    \end{itemize}
+\end{definition}
+\begin{remark}
+    For finite dimensional $\mathbb{C}$ algebras, we may always assume
+    \[ \mathcal{A} \cong \bigoplus_{i \in I} M_{n_i}(\mathbb{C}) \]
+    for some finite multiset $I \subseteq \mathbb{Z}_{\geq 0}$. In particular,
+    all $C^*$-algebras appearing in this report are isomorphic to $M_n(\mathbb{C})$ for some
+    positive integer $n$, and are therefore unital, the unit being the identity matrix $I_n$.
+\end{remark}
+Next, we further give a condition for quantum isomorphism based on $C^*$-algebras,
+which is stated in more graph theoretic terms.
 \begin{definition}\emph{\textbf{\cite{Wang_1998}}}
 Let $\mathcal{A}$ be a unital $C^*$-algebra. A \emph{magic unitary}
 (or quantum permutation matrix) is a matrix $u \in M_n(\mathcal{A})$
 whose entries are projections in $\mathcal{A}$, i.e.
 $\forall i,j \in \{1,\dots, n\}:~u_{ij} = u_{ij}^* = u_{ij}^2$, and furthermore
-\[ \forall i \in \{1,\dots, n\}:~\sum_k u_{ik} = \sum_k u_{ki} = \mathbf{1}_\mathcal{A} \]
+\begin{align}
+    \forall i \in \{1,\dots, n\}:~\sum_k u_{ik} = \sum_k u_{ki} = \mathbf{1}_\mathcal{A}
+\end{align}
 \end{definition}
 \begin{remark}
     Note that this definition generalizes the notion of
@@ -234,31 +288,73 @@ $\forall i,j \in \{1,\dots, n\}:~u_{ij} = u_{ij}^* = u_{ij}^2$, and furthermore
     being equivalent to classical isomorphisms, as the adjacency
     matrices of classically isomorphic graphs are conjugate
     under some permutation, represented by a permutation matrix.
-
     Moreover, the unital $C^*$-algebras appearing in our discussion about
     quantum isomorphic graph pairs will all be of the form
     $\mathcal{A} = M_n(\mathbb{C})$ for some $n > 1$.
 \end{remark}
-
-Another way of characterizing quantum isomorphisms of a fixed graph 
-is done in more group-theoretic terms.
-See~\cite{Musto_2018} on details about the algebraic theory
-behind quantum isomorphisms.
-
-\begin{lemma}
-    \emph{\textbf{\cite[Corollary 4.15]{Musto_2018}}}
-Let $G$ be a graph with no (non-classical) quantum automorphisms.
-Then there is a bijection between 
-\begin{itemize}
-    \item Isomorphism classes of graphs $G'$ quantum-isomorphic to $G$
-    \item Conjugacy classes of central type subgroups $(L, \psi) \subseteq \textrm{Aut}(G)$ with coisotropic stabilizers.
-\end{itemize}
+The condition that $u$ interchanges the adjacency matrices of $G$ and $H$ may 
+be reformulated in terms of products of the entries of $u$, which gives a more
+concrete approach to showing the quantum isomorphism induced by $u$.
+\begin{lemma}~\cite{schmidt2022quantumisomorphicstronglyregular}\label{lem:prod2}
+    $G$ and $H$ are quantum isomorphic if there exists a magic unitary $u \in M_n(\mathcal{A})$,
+    for which $u_{ks} u_{lt} = 0$ for $(k, l) \in E(G)$ and $(s, t) \not \in E(H)$, or vice versa.
 \end{lemma}
-\begin{remark}
-    Central type subgroups have a deep representation-theoretic description,
-    which exceeds the scope of this work.
-    The most prominent examples of central type subgroups appearing
-    in the context of quantum isomorphisms are
-    $\mathbb{Z}_n \times \mathbb{Z}_n$ for some integer
-    $n \in \mathbb{N}$. 
-\end{remark}
+
+\subsubsection{The $(G, t)$-independent set game~\cite{Man_inska_2023}.}\label{def:quindep}
+Continuing with non-local games related to graphs, we also define one which relates
+to the graph property of containing a $t$-independent set.
+\begin{definition}
+    Let $t$ be a natural number and $G$ be a graph. Then, the \emph{$(G, t)$-independent set game}
+    is defined as follows.
+    \begin{itemize}
+        \item Alice and Bob receive natural numbers $1 \leq a, b \leq t$
+        \item They answer with vertices $x_a, x_b \in V(G)$
+        \item The game is won if $a = b \implies x_a = x_b$ and $a \neq b \implies x_a \not\sim x_b$.
+    \end{itemize}
+\end{definition}
+
+More generally, we define the notion of a quantum independent set of a graph $G$, as projections 
+that yield an optimal quantum strategy for the $(G, t)$-independent set game.
+\begin{definition}
+    Let $G$ be a graph and $\mathcal{A}$ a unital $C^*$-algebra.
+    A \emph{quantum independent set} of size $t$ is a collection
+    $P = \{ P_{xu} \}_{1 \leq x \leq t, u \in V(G)}$ of projections
+    $P_{xu} \in \mathcal{A}$ such that
+    \begin{itemize}
+        \item $\sum_{u \in V(G)} P_{xu} = \mathbf{1}_{\mathcal{A}}$ for all $1 \leq x \leq t$
+        \item $P_{xu} P_{yv} = 0$ for $(u, v) \in E(G)$ and all $1 \leq x,y \leq t$
+        \item $P_{xu} P_{yu} = 0$ for all $x \neq y, u \in V(G)$
+    \end{itemize}
+    Furthermore, the \emph{quantum independence number} $\alpha_q(G)$ is defined as the maximal
+    size of a quantum independent set of $G$.
+\end{definition}
+By construction, the game has an optimal classical strategy if $G$ contains an independent set of size $t$,
+as the strategy then involves labelling the independent set as $x_1, \dots, x_t$, giving an optimal strategy.
+However, as shown in~\cite{Man_inska_2023}, optimal quantum strategies do not imply
+the existence of a $t$-independent set in $G$, meaning that there exist graphs $G$ for which
+the classical independence number $\alpha(G)$ is strictly smaller than $\alpha_q(G)$.
+
+
+
+% Another way of characterizing quantum isomorphisms of a fixed graph 
+% is done in more group-theoretic terms.
+% See~\cite{Musto_2018} on details about the algebraic theory
+% behind quantum isomorphisms.
+
+% \begin{lemma}
+%     \emph{\textbf{\cite[Corollary 4.15]{Musto_2018}}}
+% Let $G$ be a graph with no (non-classical) quantum automorphisms.
+% Then there is a bijection between 
+% \begin{itemize}
+%     \item Isomorphism classes of graphs $G'$ quantum isomorphic to $G$
+%     \item Conjugacy classes of central type subgroups $(L, \psi) \subseteq \textrm{Aut}(G)$ with coisotropic stabilizers.
+% \end{itemize}
+% \end{lemma}
+% \begin{remark}
+%     Central type subgroups have a deep representation-theoretic description,
+%     and its full description is out of scope of this work.
+%     The vast majority of central type subgroups appearing
+%     in the context of quantum isomorphisms are isomorphic to
+%     $\mathbb{Z}_n \times \mathbb{Z}_n$ for some integer
+%     $n \in \mathbb{N}$. 
+% \end{remark}

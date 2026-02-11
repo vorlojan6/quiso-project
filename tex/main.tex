@@ -18,27 +18,11 @@
 \usepackage{amssymb}
 \usepackage{tikz}
 \usetikzlibrary{calc}
+\usepackage{diagbox}
 
 \usepackage{todonotes}
 
-
 \usepackage[caption=false]{subfig}
-
-\newcommand{\jvinline}[1]{%
-  \todo[inline, color=teal, caption={}]{%
-    \begin{minipage}{\linewidth}%
-      #1%
-    \end{minipage}%
-  }%
-}
-
-\renewcommand{\question}[1]{%
-  \todo[inline, color=yellow, caption={}]{%
-    \begin{minipage}{\linewidth}%
-      \textbf{Question:} #1%
-    \end{minipage}%
-  }%
-}
 
 \newcommand{\magicsquare}[2]{%
   \draw ($(#1, #2) + ( 1.5, 1.5)$) -- ($(#1, #2) + ( 1.5, -1.5)$);%
@@ -52,12 +36,24 @@
   \draw ($(#1, #2) + (1.5, -1.5)$) -- ($(#1, #2) + (-1.5, -1.5)$);%
 }
 
+\newcommand{\spfourthree}{
+  \operatorname{Sp}_4(\mathbb{F}_3)
+}
+
+\newcommand{\sofivethree}{
+  \operatorname{O}_5(\mathbb{F}_3)
+}
+
+\newcommand{\w}{\omega}
+\newcommand{\bw}{\overline{\w}}
+
+
 
 % \DeclareMathOperator{\Uni}{Uni}
 %
 \begin{document}
 %
-\title{Quantum Isomorphisms of Finite Graphs -- \\A Construction from the Penrose Dodecahedron}
+\title{Quantum Isomorphisms of Finite Graphs -- \\Two Strongly Regular Graphs from the Penrose Dodecahedron}
 %
 \titlerunning{Quantum Isomorphisms of Finite Graphs}
 % If the paper title is too long for the running head, you can set
@@ -79,9 +75,22 @@ Ruhr University Bochum, Bochum, Germany \\
 \maketitle              % typeset the header of the contribution
 %
 \begin{abstract}
-todo
+In this report we study a relation between graphs known as quantum isomorphism
+which come from the study of non-local games in quantum information
+and naturally generalize the notion of a graph isomorphism.
+%
+We give an overview of the few known examples of non-isomorphic
+quantum isomorphic graphs and aim to extend this list by analysing 
+the orthogonality graph $Q$ of the Penrose dodecahedron and its clique graph $Q^*$,
+both of which are strongly regular with parameters $(40, 12, 2, 4)$
+and have surprisingly many properties in common.
+%
+While we neither succeeded to prove nor to disprove the existence of 
+a quantum isomorphism between $Q$ and $Q^*$, we report several
+observations which strengthen our hypothesis and show how both graphs 
+may be understood in terms of the 2-qutrit Pauli group.
 
-\keywords{Graph Isomorphism \and Non-local Games}
+\keywords{Quantum isomorphism \and Non-local games}
 \end{abstract}
 %
 %
@@ -90,7 +99,7 @@ todo
 \input{02prelim}
 \input{03construction}
 \input{04penrose}
-\input{05switching}
+\input{05discussion}
 
 %
 % ---- Bibliography ----
@@ -101,6 +110,7 @@ todo
 \bibliographystyle{splncs04}
 \bibliography{biblio}
 %
+\input{declaration}
 \end{document}
 
 

@@ -1,112 +1,136 @@
-\section{Construction of Quantum Isomorphic Graphs from the Penrose Dodecahedron}
+\section{A Pair of Strongly Regular Graphs from the Penrose Dodecahedron}
+
+In light of Table~\ref{tab:spherical}, we aim to extend the list of 
+quantum isomorphic strongly regular graphs, by analysing the 
+40 vector $(3, 3)$-design in $\mathbb{C}^4$ known as the 
+Penrose dodecahedron, which describes the 40 different states
+of a spin-3/2 particle and is used in its initial survey~\cite{ZIMBA1993697}
+to give a proof of the Kochen-Specker theorem.
+%
+Motivated by the observation that its orthogonality graph $Q$ 
+and its clique graph $Q^*$ share many unusual
+properties while not being isomorphic,
+we attempt to analyse this duality in order to answer
+whether the similarities are the shadows of
+an underlying quantum isomorphism.
+%
+We furthermore describe how $Q$ may be identified as the 
+commutation graph of the 2-qutrit Pauli group,
+deepening our understanding of the geometry of the 
+analysed configuration.
 
 \subsection{The Penrose Dodecahedron}
-
-\newcommand{\w}{\omega}
-\newcommand{\bw}{\overline{\w}}
-
-The Penrose Dodecahedron $\Phi$ is a set of 40 rays $\{ |\phi_i \rangle \}_{i=1}^{40}$ in
-$\mathbb{C}^4$ represented by the vectors:
-\begin{align*}
-    &|\phi_1 \rangle = (1,0,0,0),            &~|\phi_2 \rangle = (0,1,0,0),           &~|\phi_3 \rangle = (0,0,1,0),           &~|\phi_4 \rangle = (0,0,0,1), \\
-    &|\phi_5 \rangle = (0,1,-1,1),           &~|\phi_6 \rangle = (1,0,-1,-1),         &~|\phi_7 \rangle = (1,-1,0,1),          &~|\phi_8 \rangle = (1,1,1,0), \\    
-    &|\phi_{9} \rangle = (0,1,-\w,\bw),      &~|\phi_{10} \rangle = (1,0,-\w,-\bw),   &~|\phi_{11} \rangle = (1,-\w,0,\bw),    &~|\phi_{12} \rangle = (1,\w,\bw,0), \\    
-    &|\phi_{13} \rangle = (0,1,-\bw,\w),     &~|\phi_{14} \rangle = (1,0,-\bw,-\w),   &~|\phi_{15} \rangle = (1,-\bw,0,\w),    &~|\phi_{16} \rangle = (1,\bw,\w,0), \\    
-    &|\phi_{17} \rangle = (0,1,-\w,1),       &~|\phi_{18} \rangle = (1,0,-1,-\w),     &~|\phi_{19} \rangle = (1,-\bw,0,\bw),   &~|\phi_{20} \rangle = (1,\w,1,0), \\    
-    &|\phi_{21} \rangle = (0,1,-\bw,\bw),    &~|\phi_{22} \rangle = (1,0,-\w,-1),     &~|\phi_{23} \rangle = (1,-1,0,\w),      &~|\phi_{24} \rangle = (1,\bw,\bw,0), \\    
-    &|\phi_{25} \rangle = (0,1,-1,\w),       &~|\phi_{26} \rangle = (1,0,-\bw,-\bw),  &~|\phi_{27} \rangle = (1,-\w,0,1),      &~|\phi_{28} \rangle = (1,1,\w,0), \\    
-    &|\phi_{29} \rangle = (0,1,-\bw,1),      &~|\phi_{30} \rangle = (1,0,-1,-\bw),    &~|\phi_{31} \rangle = (1,-\w,0,\w),     &~|\phi_{32} \rangle = (1,\bw,1,0), \\    
-    &|\phi_{33} \rangle = (0,1,-1,\bw),      &~|\phi_{34} \rangle = (1,0,-\w,-\w),    &~|\phi_{35} \rangle = (1,-\bw,0,1),     &~|\phi_{36} \rangle = (1,1,\bw,0), \\    
-    &|\phi_{37} \rangle = (0,1,-\w,\w),      &~|\phi_{38} \rangle = (1,0,-\bw,-1),    &~|\phi_{39} \rangle = (1,-1,0,\bw),     &~|\phi_{40} \rangle = (1,\w,\w,0) \\    
-\end{align*}
+\input{penrose-graphic}
+The Penrose dodecahedron $\Phi$ is a set of 40 rays $|\phi_n^{(i)} \rangle, i \in \{1, \dots, 4\}, n \in \{1, \dots, 10\}$
+represented by the vectors in $\mathbb{C}^4$ displayed in Table~\ref{tab:penrose},
 where $\w = e^{\frac{2\pi i}{3}}$ is the third complex root of unity.
-In the context of this work, a ray is defined to be the equivalence class
-$\left\{ \pm\w^d \cdot v \right\}, \forall v \in \Phi$.
+In the context of this report, a ray is defined to be the equivalence class
+$\left\{ \pm\w^d \cdot v \right\}$ for any $v \in \Phi$. 
+For notational simplicity, we omit normalization factors.
+\begin{table}[h]
+    \centering
+    \caption{The vectors from the penrose dodecahedron.}\label{tab:penrose}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        $n$ & $|\phi^{(0)}_n\rangle$ & $|\phi^{(1)}_n\rangle$ & $|\phi^{(2)}_n\rangle$ & $|\phi^{(3)}_n\rangle$ \\
+        \hline
+        0 & $(1,0,0,0)$ &       $(0,1,0,0)$ &       $(0,0,1,0)$         & $(0,0,0,1)$ \\
+        \hline
+        1& $(0,1,-1,1)$ &      $(1,0,-1,-1)$ &     $(1,-1,0,1)$        & $(1,1,1,0)$ \\    
+        2& $(0,1,-\w,\bw)$ &   $(1,0,-\w,-\bw)$ &  $(1,-\w,0,\bw)$     & $(1,\w,\bw,0)$ \\    
+        3& $(0,1,-\bw,\w)$ &   $(1,0,-\bw,-\w)$ &  $(1,-\bw,0,\w)$     & $(1,\bw,\w,0)$ \\    
+        \hline
+        4& $(0,1,-\w,1)$ &     $(1,0,-1,-\w)$ &    $(1,-\bw,0,\bw)$    & $(1,\w,1,0)$ \\    
+        5& $(0,1,-\bw,\bw)$ &  $(1,0,-\w,-1)$ &    $(1,-1,0,\w)$       & $(1,\bw,\bw,0)$ \\    
+        6& $(0,1,-1,\w)$ &     $(1,0,-\bw,-\bw)$ & $(1,-\w,0,1)$       & $(1,1,\w,0)$ \\    
+        \hline
+        7& $(0,1,-\bw,1)$ &    $(1,0,-1,-\bw)$ &   $(1,-\w,0,\w)$      & $(1,\bw,1,0)$ \\    
+        8& $(0,1,-1,\bw)$ &    $(1,0,-\w,-\w)$ &   $(1,-\bw,0,1)$      & $(1,1,\bw,0)$ \\    
+        9& $(0,1,-\w,\w)$ &    $(1,0,-\bw,-1)$ &   $(1,-1,0,\bw)$      & $(1,\w,\w,0)$ \\    
+        \hline
+    \end{tabular}
+\end{table}
 
-\subsection{The Kochen-Specker Theorem and Kochen-Specker Sets}
+
+
+\subsection{The Kochen-Specker Theorem and Kochen-Specker Sets}\label{sec:ksset}
 This configuration of rays first appeared in~\cite{ZIMBA1993697}
 and was used to construct a proof of the Kochen-Specker
 theorem on non-contextuality.
 In short, the Kochen-Specker theorem claims the
 non-existence of hidden-variable theories which are compatible
 with the rules of quantum mechanics.
-The idea of its proof is to find a set of rays $S$
-(describing the possible states of some quantum system)
+The idea of its proof is to find a set of rays $S$,
+describing the possible states of some quantum system,
 for which a non-contextual hidden-variable labelling $f~:~S \rightarrow \{0, 1\}$
 can not exist, meaning that the measurement outcome of some measurement on $S$
 can not be classically predicted by $f$.
 
-Note that the Magic Square Game has essentially those properties.
-There is no classical labelling function $f$ which allows the players
-to win with certainty. Yet, the measurements involved in the
-winning quantum strategy perfectly describe the state space of 
-the Magic Square Game, which is why the players can exploit their
-shared quantum state to win with absolute certainty.
-
 Since the original proof of the Kochen-Specker theorem,
-a number of such configurations were found, in different Hilbert spaces
-and with different numbers of rays.
-Therefore, in order to reference all those configurations
-sharing this special property, the following term was coined.
+multiple such configurations were found,
+motivating the definition of a Kochen-Specker set.
 \begin{definition}
-    A \emph{Kochen-Specker Set} $S$ is a configuration of
+    A \emph{Kochen-Specker set} $S$ is a configuration of
     rays in some Hilbert space which have no hidden-variable labelling and
     therefore give a proof of the Kochen-Specker theorem.
 \end{definition}
-Naturally, the smaller, simpler or more symmetric a
-Kochen-Specker set is, the more intrinsic academic
-value it has, which is why the Penrose Dodecahedron was
-studied in the first place.
+Note that the magic square game from Section~\ref{sec:magic-square} has essentially those properties.
+There is no classical labelling function $f$ which allows the players
+to win with certainty. Yet, the measurements involved in the
+winning quantum strategy perfectly describe the state space of 
+the magic square game, which is why the players can exploit their
+shared quantum state to win with absolute certainty.
 
-
-Due to the above observations, the relevance of
-Kochen-Specker sets for non-local games is assumed to be clear and
-shall not require no further argumentation.
+As it turns out, there is a natural way to construct a Kochen-Specker set associated to the magic square
+by considering the rays spanned by the simultaneous eigenstates of each row, giving 
+a highly symmetric configuration in $\mathbb{R}^4$ known as the 24-cell.
+Respectively, the rays coming from the mutual eigenstates
+of each column the column form the dual of the 24-cell, see~\cite{article} and~\cite{quant1365359} for further details.
 
 
 \subsection{The Graphs $Q$ and $Q^*$}
 
-In~\cite{ZIMBA1993697}, the argumentation about the non-existence of 
-hidden-variable labelling functions included the graphs $Q$ and $Q^*$.
+In~\cite{ZIMBA1993697}, the discussion about the non-existence of 
+hidden-variable labelling functions included the graphs $Q$ and $Q^*$,
+which gives the basis of the main objective for this report.
 \begin{definition}
     We define the following graphs:
     \begin{enumerate}
         \item The graph $Q = (V_Q, E_Q)$ is the orthogonality graph of $\Phi$, i.e. 
             \begin{align}
-                V_Q = \left\{ v_i := v_{|\phi_i \rangle}~\middle|~|\phi_i \rangle \in \Phi \right\},~E_Q = \left\{ (v_i, v_j)~\iff~\langle \phi_i | \phi_j \rangle = 0 \right\}
+                V_Q = \left\{ v_i := v_{|\phi_i \rangle}~\middle|~|\phi_i \rangle \in \Phi \right\},~E_Q = \left\{ (v_i, v_j) \iff \langle \phi_i | \phi_j \rangle = 0 \right\}
             \end{align}
 
-        \item The graph $Q^* = (V_{Q^*}, E_{Q^*})$ is called the basis graph of $\Phi$, with
+        \item The graph $Q^* = (V_{Q^*}, E_{Q^*})$ is called the clique graph of $Q$, with
             \begin{align}
                 V_{Q^*} = \left\{ v_S~|~S \subset \Phi \textrm{ orthonormal basis} \right\},~E_{Q^*} = \left\{ (v_{S_1}, v_{S_2}) \iff S_1 \cap S_2 \neq \emptyset \right\}
             \end{align}
-            In words, the vertices of $Q^*$ correspond to the orthonormal bases, and vertices share an edge if the respective bases share a vector.
+            In words, the vertices of $Q^*$ correspond to the orthonormal bases of $\Phi$,
+            and vertices share an edge if the respective bases share a vector.
     \end{enumerate}
 \end{definition}
 
 \subsubsection{A curious duality.}
-
-As noted in~\cite{ZIMBA1993697}, the graphs have an unusually large number of properties in common.
-As an example, the fact that $|V_Q| = |V_{Q^*}| = 40$ is unexpected and is a priori purely coincidental.
-For context, considering the graph $G_{E_8}^*$ as the basis graph of the $E_8$ root system,
-the vertex counts are totally different and do not seem to be related:
-$|G_{E_8}| = 120 \neq 2025 = |G_{E_8}^*|$.
+As noted in~\cite{ZIMBA1993697}, the graphs have unusually many properties in common.
+As an example, the fact that $|V_Q| = |V_{Q^*}| = 40$ a priori appears to be purely coincidental.
+For reference, considering the graph $G_{E_8}^*$ as the clique graph of $G_{E_8}$,
+we have $|G_{E_8}| = 120 \neq 2025 = |G_{E_8}^*|$, which appear to be 
+unrelated measures.
 
 Moreover, the condition $S_1 \cap S_2 \neq \emptyset$ that determines whether vertices in $Q^*$
 are connected is equivalent to the condition
 $\exists \tilde{v} \in \Phi:S_1 \cap S_2 = \{ \tilde{v} \}$, i.e. orthonormal bases in $\Phi$ share at most one ray.
 This gives an interesting duality between $Q$ and $Q^*$,
 since the maximal 4-cliques in $Q^*$ correspond to a unique vertex in $Q$ and vice versa.
-
-Additionally,
-the two graphs are both strongly regular graphs with the same parameters,
+Additionally, the two graphs are both strongly regular graphs with the same parameters,
 i.e.
 \[ Q, Q^* \in \textsf{SRG}(40, 12, 2, 4). \]
 Yet, as pointed out in~\cite{ZIMBA1993697}, the graphs are not isomorphic,
 as any subgraph of $Q$ with vertex count 10 must contain an edge, while this 
 is not the case for $Q^*$.
-
-Next, we see that these properties suggests the existence of a quantum isomorphism between $Q$ and $Q^*$.
+In particular, the independence number of $Q$ is $7$, while $Q^*$ has independence number $10$.
+%
+We see next that these properties suggest the existence of a quantum isomorphism between $Q$ and $Q^*$.
 \begin{lemma}
     Quantum isomorphisms preserve the parameters of strongly regular graphs.
 \end{lemma}
@@ -116,28 +140,13 @@ Next, we see that these properties suggests the existence of a quantum isomorphi
     restricted eigenvalues $r, s$.
     Next, due to~\cite[Theorem 9.1.3]{brouwer12},
     the values of $r$ and $s$ determine the values of $n,k,\lambda,\mu$ uniquely, and vice versa.
-    Since quantum isomorphic graphs are cospectral~\cite{atserias2017quantumnonsignallinggraphisomorphisms}
-    (meaning that their spectrum $(k, r, s)$ is preserved), we arrive at our claim.
+    Since quantum isomorphic graphs are cospectral~\cite{atserias2017quantumnonsignallinggraphisomorphisms},
+    meaning that their spectrum $(k, r, s)$ is preserved, we arrive at our claim.
 \end{proof}
-% \todo{This can be written way earlier}
-% Denote the graph isomorphism as $\varphi:G_1 \rightarrow G_2$.
-% By definition, graph $G$ is strongly regular with parameters $(n, k, \lambda, \mu)$ if:
-% \begin{itemize}
-%     \item $|V(G)| = n$
-%     \item Each vertex $v \in V(G)$ has exactly $k$ neighbours
-%     \item Each pair of adjacent vertices have $\lambda$ common neighbours
-%     \item Each pair of non-adjacent vertices have $\mu$ common neighbours
-% \end{itemize}
-% Next, since a quantum isomorphism translates to a perfect quantum
-% strategy of the graph isomorphism game, meaning that
-% $v_1 \sim v_2 \iff \varphi(v_1) \sim \varphi(v_2)$, where $\sim$ means either 
-% equality, adjacency or non-adjacency.
-
 \subsubsection{Counting homomorphisms from planar graphs.}
-
-To strengthen the hypothesis that, if existent,
-the quantum isomorphism maps between the pair of graphs $(Q, Q^*)$
-and not to some other graph in $\textsf{SRG}(40, 12, 2, 4)$,
+To strengthen the hypothesis that
+a potential quantum isomorphism would relate $Q$ to $Q^*$ 
+and not some other graph in $\textsf{SRG}(40, 12, 2, 4)$,
 we make use of a result stating that quantum isomorphic graphs admit
 the same number of homomorphism counts from any planar graph.
 \begin{theorem}
@@ -147,15 +156,12 @@ the same number of homomorphism counts from any planar graph.
         \item $G \cong_q H$, i.e. there is a perfect quantum strategy for the $(G, H)$-isomorphism game;
         \item $G$ and $H$ admit the same number of homomorphisms from any planar graph.
     \end{itemize}
-    
 \end{theorem}
-
 By iterating over all graphs in $\textsf{SRG}(40, 12, 2, 4)$
 (of which only 28 exist, see the classification in~\cite{Spence2000}),
 and choosing a suitable planar graph $H$, we may divide those
-28 graphs into classes containing 
-graphs with the same homomorphism count.
-
+28 graphs into classes having the same homomorphism count from $H$.
+%
 Straightforward computation shows that from those 28 graphs,
 only $Q$ and $Q^*$ have 40 4-cliques
 (corresponding to the vertices of the respective other graph),
@@ -169,27 +175,209 @@ While this computation neither proves nor strengthens the claim
 that $Q$ and $Q^*$ are quantum isomorphic, it shows that 
 if any of the two graphs admit a quantum isomorphism, it has to 
 map into the other graph of this pair.
-% Conversely, if neither of the two graphs induce a quantum isomorphism,
 
 
 
+\subsection{$Q$ has Quantum Independence Number $10$}
+
+We recall from the discussion in Section~\ref{sec:ksset} that $Q$ is the orthogonality graph of the Penrose dodecahedron,
+which forms a Kochen-Specker set.
+%
+In particular, it forms a \emph{projective Kochen-Specker set}, which is a Kochen-Specker set constructed from $k$ orthonormal bases,
+such that there is no subset of $k$ mutually non-orthogonal vectors.
+In terms of its orthogonality graph, this means that the independence number is smaller than the number of disjoint cliques.
+
+This is indeed the case for our graph $Q$, as $k = 10$, yet $\alpha(Q) = 7 < 10$.
+From~\cite{godsil2024quantumindependencechromaticnumbers}, we see that this already implies $\alpha_q(Q) > \alpha(Q)$.
+Explicitly, we give an optimal strategy for the $(Q, 10)$-independent set game which proves the bound $\alpha_q(Q) \geq 10$.
+
+\begin{lemma}
+    Let $\mathcal{A} = M_4(\mathbb{C})$. Then, the following strategy is an optimal
+    strategy for the $(Q, 10)$-independent set game.
+    \begin{itemize}
+        \item Choose a partition of $V(Q)$ into ten disjoint cliques $C_x$. This is possible as $\alpha(Q^*) = 10$.
+        \item $P_{xu} = |v_u \rangle\langle v_u|$ if $v_u$ is contained in clique $C_x$, otherwise $P_{xu} = 0$. 
+    \end{itemize}
+\end{lemma}
+\begin{proof}
+    We check whether the defining conditions from Definition~\ref{def:quindep} hold for our choice of projections.
+    First, we see that $\sum_{u \in V(Q)} P_{xu} = I_4$ as we sum over the vectors contained in a 
+    fixed clique, which translates to summing over the projections
+    of an orthonormal basis, giving $I_4$.
+    Next, if $(u, v) \in E(Q)$, we know by definition that the corresponding vectors are
+    orthogonal.
+    Hence, even if both projections are non-zero (which is the only non-trivial case),
+    we see that their product is nevertheless zero.
+    Lastly, we confirm that $P_{xu} P_{yu} = 0$ for $x \neq y$.
+    For that we make use of the fact that $C_x$ are disjoint cliques, meaning that 
+    each vertex is a member in exactly one clique $C_x$.
+    Therefore, $P_{xu} \neq 0$ for exactly one $x$, i.e. $P_{yu} = 0$ for all other $y \neq x$
+    and hence $P_{xu} P_{yu} = 0$ for $y \neq x$.
+\end{proof}
+Note that this construction is essentially the one described in~\cite{godsil2024quantumindependencechromaticnumbers}.
+%
+Furthermore, we observe that quantum isomorphic graphs $G, H$ must have the
+same quantum independence number, since the existence of a perfect quantum strategy
+for the $(G, k)$-independent set game may be transferred to a perfect quantum strategy
+for the $(H, k)$-independent set game and vice versa, using the perfect 
+strategy for the $(G, H)$-isomorphism game.
 
 
+\subsection{An Interpretation of $Q$ and $Q^*$ in terms of Qutrit Pauli's}
+In this section we describe a natural way of identifying vectors
+of the Penrose dodecahedron in terms of qutrit Pauli matrices,
+answering a question in~\cite{Planat_2007} 
+and allowing to deepen our understanding of the structure of $Q$.
+% Furthermore, this facilitates the analysis of actions on $Q$ and $Q^*$.
 
+Recall that the generalized Paulis $X_r$ and $Z_r$ are the
+unique operators on $\mathbb{C}^r$ fulfilling
+$X_r |i\rangle = |i + 1\rangle$ and $Z_r |i\rangle = \w_r^i |i\rangle$ for all
+$i \in \{1, \dots, r\}$. 
+Throughout, we will consider the case $r = 3$, for which we have matrices
+\[ X := X_3 = \begin{pmatrix}
+    0 & 0 & 1 \\
+    1 & 0 & 0 \\
+    0 & 1 & 0 
+\end{pmatrix},~Z := Z_3 = \begin{pmatrix}
+    1 & 0 & 0 \\
+    0 & \w & 0 \\
+    0 & 0 & \bar{\w}
+    
+\end{pmatrix} \in \mathbb{C}^{3\times3} \]
+where again $\w = e^{2\pi i /3}$ is the third complex root of unity.
+Recall furthermore the identities
+$X^2 = X^* = \bar{X}, Z^2 = Z^* = \bar{Z}$ and $X^a Z^b = \w^{-ab} Z^b X^a$, for $a,b \in \mathbb{Z}_3$.
+The matrices $X$ and $Z$ generate the qutrit Pauli group $\mathcal{P}_3$ on $\mathbb{C}^3$,
+which, up to global phase, comprises of the elements
+\[ \left\{ I, X, X^2, Z, Z^2, Y, Y^2, V, V^2 \right\}, \]
+where $Y := XZ$, $V := XZ^2$ and $I$ is the $3 \times 3$ identity matrix.
+%
+Moreover, the 2-qutrit Pauli group $\mathcal{P}_9$
+comprises of the tensor product of two elements in $\mathcal{P}_3$
+and therefore has $9^2 = 81$ elements.
 
+As noted in~\cite{Planat_2007,planat:hal-00127731}, the commutation relations 
+between generalized Pauli matrices follow a nice graph-theoretical pattern.
+It was shown that taking the maximally commuting subsets (MCSs)
+of $\mathcal{P}_9 \setminus \{ I \otimes I \}$ as vertices
+and considering two vertices to
+be adjacent when the corresponding MCSs share at least one element
+yields a strongly regular graph in $\textsf{SRG}(40, 12, 2, 4)$.
+It is considered to be the dual of the so-called Pauli graph,
+which has $\mathcal{P}_9 \setminus \{ I \otimes I \}$ as vertex set and the adjacency relation 
+that commuting operators share an edge. However,
+this duality breaks down, since the Pauli graph
+turns out to not be strongly regular and furthermore comprises of
+$80$ instead of $40$ vertices.
 
+This obstruction is due to the missing identification
+of two elements as the same vertex inside the Pauli graph.
+In particular, below we give a natural description of $Q$ in terms
+of isotropic points in the symplectic space $\spfourthree$,
+which will immediately give the necessary identification of Pauli matrices.
 
+\subsubsection{The Pauli Representation of $\spfourthree$.}
+There are several known constructions for $Q$ and $Q^*$.
+For example, it is well-known from~\cite{Brouwer_Van_Maldeghem_2022},
+that $Q$ and $Q^*$ are the collinearity graphs of the two 
+generalized quadrangles $GQ(3, 3)$, which are dual to each other,
+meaning that points in the one correspond to lines in the other and vice versa.
+%
+More interestingly, $Q$ may also be seen as the graph containing the isotropic 
+points inside $\spfourthree$, while $Q^*$ is the isotropy graph 
+of the $\sofivethree$ space. We will introduce both notions below.
+\begin{definition}
+    Let $k$ be a field. A \emph{symplectic vector space}, denoted $\operatorname{Sp}_n(k)$
+    or simply $\operatorname{Sp}(V)$, is a vector space $V \cong k^n$ equipped
+    with an alternating non-degenerate bilinear form $\w: V \times V \rightarrow k$,
+    where the alternating property is defined as the 
+    property that $\forall u \in V$, we have $\w(u, u) = 0$.
+    In particular, if $\operatorname{char}(k) \neq 2$, the alternating property
+    implies that the form is anti-symmetric, meaning that 
+    $\forall u,v \in V:\w(u,v) = -\w(v, u).$
+\end{definition}
+We continue by introducing quadratic spaces,
+necessary to understand the structure of $Q^*$.
+\begin{definition}\cite{O’Meara2000}
+    Let $k$ be a field, and $V \cong k^n$ a vector space over $k$.
+    A \emph{quadratic form} over $k$ is a function $q : V \rightarrow k$
+    which stems from a degree-2 homogeneous polynomial in $k[x_1, \dots, x_n]$.
+    In particular,
+    \[ q(\lambda v) = \lambda^2 q(v)\]
+    for any $\lambda \in k$.
+    Then, the $n$-dimensional \emph{quadratic space over $k$}, denoted as $\operatorname{O}_n(k)$
+    is defined as the vector space $V$ equipped with some quadratic form $q$.
 
+    Moreover, two vectors $v_1, v_2 \in \operatorname{O}_n(k)$
+    are said to be \emph{mutually isotropic} whenever $q(v_1, v_2) = 0$.
+    Similarily, a vector $v$ is isotropic iff $q(v, v) = 0$.
+\end{definition}
+The reason for this notation comes from the fact that
+the closely related \emph{orthogonal group}
+$O_n(k) \subseteq GL_n(k)$ over the form $q$
+is the group of matrices $M \in GL_n(k)$
+that leave the underlying quadratic space invariant, i.e. $q(Mv) = q(v)$.
 
+Next we introduce the notion of a point in either of these spaces.
+\begin{definition}
+    Let $V$ be either a symplectic or a quadratic space.
+    A \emph{point} in $V$ is a 1-dimensional subspace $\langle v \rangle \subseteq V$ spanned by some vector $v \in V$. Throughout, we often identify points with some representative vector spanning this subspace.
+\end{definition}
+Interestingly, in~\cite{Brouwer_Van_Maldeghem_2022} it is mentioned that
+the strongly regular graphs $Q$ and $Q^*$ from above can be interpreted as the
+isotropy graphs of the points in $\spfourthree$ and $\sofivethree$, respectively.
+%
+Furthermore, the adjacency relation is defined by isotropy of the corresponding
+two points in the respective space.
+%
+This may be reformulated further,
+as there is a representation $\spfourthree \rightarrow GL_4(\mathbb{C})$ 
+given by the 2-qutrit Pauli group $\mathcal{P}_9$.
+\begin{lemma}
+    Let $\spfourthree$ be the vector space $\mathbb{F}_3^4$ equipped with the symplectic form
+    $\omega(u, v) := u_1 v_2 - v_1 u_2 + u_3 v_4 - v_3 u_4$.
+    Then there is a canonical map from the isotropic points in $\spfourthree$ to $\mathcal{P}_9$,
+    defined by the rule
+    \begin{align}
+        \langle v \rangle := (v_1, v_2, v_3, v_4)~\mapsto~X^{v_1} Z^{v_2} \otimes X^{v_3} Z^{v_4} =: \rho_v
+    \end{align} 
+    Furthermore, for $u, v \in \spfourthree$ we have that $u$ and $v$ are mutually isotropic iff $\rho_u$ and $\rho_v$ commute.
+\end{lemma}
+\begin{proof}
+    First, note that due to the properties of a symplectic form, 
+    we have $\omega(v, v) = 0$ for any vector $v \in \spfourthree$,
+    i.e. any point is trivially isotropic.
 
+    Next, for any 2-qutrit Pauli matrices $\rho_u, \rho_v$ we observe
+    \begin{align*}
+        \rho_u \rho_v &= (X^{u_1} Z^{u_2} \otimes X^{u_3} Z^{u_4}) (X^{v_1} Z^{v_2} \otimes X^{v_3} Z^{v_4}) \\
+        &= X^{u_1} Z^{u_2} X^{v_1} Z^{v_2} \otimes X^{v_3} Z^{v_4} X^{u_3} Z^{u_4} \\
+        &= \omega^{v_1 u_2} X^{v_1} X^{u_1} Z^{v_2} Z^{u_2} \otimes \omega^{u_3 v_4} X^{v_3} X^{u_3} Z^{v_4} Z^{u_4} \\
+        &= \omega^{v_1 u_2} \omega^{-u_1 v_2} X^{v_1} Z^{v_2} X^{u_1} Z^{u_2} \otimes \omega^{u_3 v_4} \omega^{- v_3 u_4} X^{v_3} Z^{v_4} X^{u_3} Z^{u_4} \\
+        &= \omega^{v_1 u_2 - u_1 v_2 + u_3 v_4 - v_3 u_4} (X^{v_1} Z^{v_2} \otimes X^{v_3} Z^{v_4}) (X^{u_1} Z^{u_2} \otimes X^{u_3} Z^{u_4}) \\
+        &= \omega^{v_1 u_2 - u_1 v_2 + u_3 v_4 - v_3 u_4} \rho_v \rho_u.
+    \end{align*}
+    Thus, $\rho_u$ and $\rho_v$ commute iff 
+    $v_1 u_2 - u_1 v_2 + u_3 v_4 - v_3 u_4 = 0$, which is exactly the condition that $\omega(u, v) = 0$, i.e. that $u$ and $v$ are mutually isotropic.
 
-
-
-
-
-
-% \jvinline{
-%     Note that the 40 vectors form 40 orthonormal bases,
-%     furthermore we can partition the 40 vectors into 10 disjoint bases in 36 different ways.
-% }
+    Furthermore, recall that the symplectic form $\omega$ is bilinear, i.e. $\omega(\lambda u, v) = \lambda \omega(u, v)$ for $\lambda \in \mathbb{F}_3^\times$, and similarily for the other argument. 
+    Therefore, we see that vectors $u, v$ being mutually isotropic extends to their spanned 1-dimensional subspaces,
+    i.e. the associated points, being isotropic. 
+    We must therefore identify those Pauli matrices whose symplectic vectors describe the same point.
+    Since $\mathbb{F}_3^\times = \{ 1, 2 \}$, we shall identify each
+    $\rho_v$ with $\rho_{2v} = \rho_v^2 = \rho_v^\dagger$, 
+    meaning that Pauli operators and their \emph{inverses} form one point in $\spfourthree$ and thus 
+    form the same vertex in $Q$.
+\end{proof}
+Strikingly, there exists a representation of $\sofivethree$ that is equivalent to 
+the one described above. It is a consequence of the natural map 
+\[ \spfourthree \rightarrow \sofivethree \]
+induced by the second exterior power, as described in~\cite{bonnafé2023uneconstructiondugroupe}.
+In essence, this map comes from the isomorphism $\sofivethree \cong \wedge^2 \mathbb{F}_3^4 / \langle \w\rangle$, where $\omega := e_1 \wedge f_1 + e_2 \wedge f_2$ is the induced bivector by the symplectic form.
+This suggests identifying vertices in $Q^*$ as bivectors over $\spfourthree$.
+\begin{remark}
+    While the identification of $V(Q)$ with 2-qutrit Paulis is rather natural, it is yet unclear how to 
+    canonically map points in $\spfourthree$ to the vectors inside the Penrose dodecahedron.
+\end{remark}
 
