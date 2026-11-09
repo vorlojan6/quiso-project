@@ -12,8 +12,8 @@ An independent set of a graph is a subgraph of $G$ containing no edges,
 and the independence number $\alpha(G)$ is defined to be the vertex count
 of a maximal independent set of $G$.
 
-A homomorphism of two graphs $G, H$ is defined to be a map $\phi : V(G) \rightarrow V(H)$
-such that $i \sim_G j \implies \phi(i) \sim_H \phi(j)$.
+A homomorphism of two graphs $G, H$ is defined to be a map $\varphi : V(G) \rightarrow V(H)$
+such that $i \sim_G j \implies \varphi(i) \sim_H \varphi(j)$.
 Moreover, two graphs $G$ and $H$ are isomorphic if the above implication is two-sided.
 An automorphism of a graph $G$ is an isomorphism to itself.
 
@@ -30,7 +30,7 @@ see for example~\cite{Brouwer_Van_Maldeghem_2022},
 as they lie on the border between structure and disorder and are still poorly understood in general.
 In particular, strongly regular graphs are generally not uniquely determined by their parameters,
 and for some parameter choices there are exponentially many non-isomorphic graphs,
-while for some parameter choices there are none at all.
+while for other parameter choices there are none at all.
 
 \subsection{Non-Local Games}
 Non-local games consist of two non-communicating players Alice and Bob, which are given 
@@ -68,7 +68,7 @@ We say that Alice and Bob adopt a (deterministic) \emph{classical strategy} if t
 and $f_B: I_B \rightarrow O_B$ beforehand, which are applied to their questions during the game.
 In particular, no quantum entanglement is used. 
 On the other hand, in case of a \emph{quantum strategy}, the players agree to apply local question-dependent 
-operations, i.e. unitaries and measurements, onto their share of qudits, 
+operations, i.e. unitaries and projection-valued measures (PVMs), onto their share of qudits, 
 and answer depending on the result of some measurement on their share of qudits.
 
 The \emph{winning probability} of a non-local game $G$ for some strategy $S$ is defined as
@@ -81,19 +81,13 @@ In particular, for classical strategies, we may simplify to
 \[ p(a,b|x,y) = p\left(f_A(x) = a\right) \cdot p\left(f_B(y) = b\right), \]
 while for quantum strategies we may rewrite to
 \[ p(a,b|x,y) = \langle \Psi| P_x(a) \otimes P_y(b) |\Psi\rangle, \]
-where $P_x$ and $P_y$ are some projections parametrized by the received questions.
-It is possible to further generalize to \emph{quantum commuting strategies}, which
-allow Alice and Bob to use global measurements $P_x$ on $|\Psi\rangle$,
-as long as the measurement operators commute. In this case,
-\[ p(a,b|x,y) = \langle \Psi| P_x(a) P_y(b) |\Psi\rangle. \]
-It is known that for finite dimensional Hilbert spaces, to which we restrict our attention in this report,
-the two notions of quantum and quantum commuting stragegies are equivalent.
+where $P_x$ and $P_y$ are PVMs parametrized by the received questions.
 %
 Studying non-local games is motivated by a peculiar phenomenon called \emph{quantum advantage},
 describing that the pre-shared quantum resources allow to devise quantum strategies,
 which may achieve higher winning probabilities than classical strategies,
 i.e. strategies that do not utilise these quantum resources.
-Phrased in terms of the optimal classical (respectively quantum) winning strategy,
+Phrased in terms of the optimal classical and quantum winning strategies,
 \begin{align*}
     \omega^*(G) := \sup_{S \textrm{ classical}}~\omega_S(G), & & \omega_q^*(G) := \sup_{S \textrm{ quantum}} \omega_S(G),
 \end{align*}
@@ -153,10 +147,10 @@ giving us the contradiction.
 However, it is in fact possible to find an optimal quantum strategy, by sharing two qubit pairs in the Bell state,
 i.e. the state 
 \[ |\Psi\rangle = \frac{1}{\sqrt{2}} \left(|0\rangle |0\rangle + |1\rangle|1\rangle \right)_{A_1 B_1} \otimes \frac{1}{\sqrt{2}}\left(|0\rangle |0\rangle + |1\rangle|1\rangle \right)_{A_2 B_2}, \]
-where $|0\rangle = (1, 0)^T$ and $|1\rangle = (0, 1)^T$ are the standard basis vectors of the Hilbert space $\mathbb{C}^2$,
+where $|0\rangle = (1, 0)^\textsf{T}$ and $|1\rangle = (0, 1)^\textsf{T}$ are the standard basis vectors of the Hilbert space $\mathbb{C}^2$,
 in which the possible states of a qubit live.
 Now, based on the questions they received, Alice and Bob measure their share of qubits via the observables given
-in~\ref{fig:quantum-magic-square} and label the square entries with the measurement outcomes,
+in Figure~\ref{fig:quantum-magic-square} and label the square entries with the measurement outcomes,
 i.e. with one of the eigenvalues of the observable.
 Since the operators in one row or column commute with each other, they share an eigenbasis,
 and since quantum measurements translate to projections onto eigenspaces of the observable,
@@ -234,34 +228,12 @@ Based on this definition, we further define the notion of a quantum isomorphism 
 \end{remark}
 There are many alternative definitions of a quantum isomorphism between graphs,
 some of which are more helpful for the explicit construction of those graph pairs.
-Moreover, the language describing quantum strategies for the $(G, H)$-graph isomorphism game
-is based on $C^*$-algebras, which we define next.
-\begin{definition}
-    A normed algebra $\mathcal{A}$ is an associative algebra over $\mathbb{C}$
-    equipped with a norm $||\cdot ||:\mathcal{A} \rightarrow \mathbb{R}_{\geq 0}$.
-    A Banach algebra is a complete normed algebra, i.e. one in which every Cauchy sequence converges.
-    Lastly, a $C^*$-algebra $\mathcal{A}$ is a Banach algebra with an involution
-    $ ^* : \mathcal{A} \rightarrow \mathcal{A}$ such that for any $x, y \in \mathcal{A}$,
-    \begin{itemize}
-        \item $x^{**} = x$,
-        \item $(x+y)^{*} = x^* + y^*$,
-        \item $(xy)^{*} = y^* x^*$,
-        \item $(\lambda x)^* = \bar{\lambda} x^*$
-        \item $||x^* x || = ||x||^2$.
-    \end{itemize}
-\end{definition}
-\begin{remark}
-    For finite dimensional $\mathbb{C}$ algebras, we may always assume
-    \[ \mathcal{A} \cong \bigoplus_{i \in I} M_{n_i}(\mathbb{C}) \]
-    for some finite multiset $I \subseteq \mathbb{Z}_{\geq 0}$. In particular,
-    all $C^*$-algebras appearing in this report are isomorphic to $M_n(\mathbb{C})$ for some
-    positive integer $n$, and are therefore unital, the unit being the identity matrix $I_n$.
-\end{remark}
-Next, we further give a condition for quantum isomorphism based on $C^*$-algebras,
+%
+Below we give one such definition,
 which is stated in more graph theoretic terms.
-\begin{definition}\emph{\textbf{\cite{Wang_1998}}}
-Let $\mathcal{A}$ be a unital $C^*$-algebra. A \emph{magic unitary}
-(or quantum permutation matrix) is a matrix $u \in M_n(\mathcal{A})$
+\begin{definition}[\cite{Wang_1998}]
+Let $\mathcal{A} \cong M_m(\mathbb{C})$ for some positive integer $m$.
+A \emph{magic unitary} (or quantum permutation matrix) is a matrix $u \in M_n(\mathcal{A})$
 whose entries are projections in $\mathcal{A}$, i.e.
 $\forall i,j \in \{1,\dots, n\}:~u_{ij} = u_{ij}^* = u_{ij}^2$, and furthermore
 \begin{align}
@@ -275,32 +247,30 @@ $\forall i,j \in \{1,\dots, n\}:~u_{ij} = u_{ij}^* = u_{ij}^2$, and furthermore
     (here the set of projections is just $\{0,1 \}$).
 \end{remark}
 
-\begin{definition}
+\begin{lemma}
     Let $G, H$ be graphs. $G$ and $H$ are quantum isomorphic iff
-    there exists a unital $C^*$-algebra $\mathcal{A}$ and
+    there exists $\mathcal{A} \cong M_m(\mathbb{C})$ for some positive
+    integer $m$ and
     a magic unitary $u \in M_n(\mathcal{A})$ such that 
-    \[ A_G u = u A_H, \]
+    \[ (A_G \otimes I_m) u = u (A_H \otimes I_m), \]
     where $A_G$ and $A_H$ are the adjacency matrices of $G$ and $H$ respectively.
-\end{definition}
+\end{lemma}
 \begin{remark}
     Continuing the previous remark, we see that the special case 
     $\mathcal{A} = \mathbb{C}$ translates to quantum isomorphisms
     being equivalent to classical isomorphisms, as the adjacency
     matrices of classically isomorphic graphs are conjugate
     under some permutation, represented by a permutation matrix.
-    Moreover, the unital $C^*$-algebras appearing in our discussion about
-    quantum isomorphic graph pairs will all be of the form
-    $\mathcal{A} = M_n(\mathbb{C})$ for some $n > 1$.
 \end{remark}
 The condition that $u$ interchanges the adjacency matrices of $G$ and $H$ may 
 be reformulated in terms of products of the entries of $u$, which gives a more
 concrete approach to showing the quantum isomorphism induced by $u$.
-\begin{lemma}~\cite{schmidt2022quantumisomorphicstronglyregular}\label{lem:prod2}
+\begin{lemma}[\cite{ALCO_2024__7_2_515_0}]\label{lem:prod2}
     $G$ and $H$ are quantum isomorphic if there exists a magic unitary $u \in M_n(\mathcal{A})$,
     for which $u_{ks} u_{lt} = 0$ for $(k, l) \in E(G)$ and $(s, t) \not \in E(H)$, or vice versa.
 \end{lemma}
 
-\subsubsection{The $(G, t)$-independent set game~\cite{Man_inska_2023}.}\label{def:quindep}
+\subsubsection{The $(G, t)$-independent set game~(\cite{Man_inska_2023}).}\label{def:quindep}
 Continuing with non-local games related to graphs, we also define one which relates
 to the graph property of containing a $t$-independent set.
 \begin{definition}
@@ -312,11 +282,11 @@ to the graph property of containing a $t$-independent set.
         \item The game is won if $a = b \implies x_a = x_b$ and $a \neq b \implies x_a \not\sim x_b$.
     \end{itemize}
 \end{definition}
-
+%
 More generally, we define the notion of a quantum independent set of a graph $G$, as projections 
 that yield an optimal quantum strategy for the $(G, t)$-independent set game.
 \begin{definition}
-    Let $G$ be a graph and $\mathcal{A}$ a unital $C^*$-algebra.
+    Let $G$ be a graph and $\mathcal{A} \cong M_m(\mathbb{C})$ for some positive integer $m$.
     A \emph{quantum independent set} of size $t$ is a collection
     $P = \{ P_{xu} \}_{1 \leq x \leq t, u \in V(G)}$ of projections
     $P_{xu} \in \mathcal{A}$ such that

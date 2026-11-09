@@ -20,7 +20,6 @@ deepening our understanding of the geometry of the
 analysed configuration.
 
 \subsection{The Penrose Dodecahedron}
-\input{penrose-graphic}
 The Penrose dodecahedron $\Phi$ is a set of 40 rays $|\phi_n^{(i)} \rangle, i \in \{1, \dots, 4\}, n \in \{1, \dots, 10\}$
 represented by the vectors in $\mathbb{C}^4$ displayed in Table~\ref{tab:penrose},
 where $\w = e^{\frac{2\pi i}{3}}$ is the third complex root of unity.
@@ -62,26 +61,22 @@ non-existence of hidden-variable theories which are compatible
 with the rules of quantum mechanics.
 The idea of its proof is to find a set of rays $S$,
 describing the possible states of some quantum system,
-for which a non-contextual hidden-variable labelling $f~:~S \rightarrow \{0, 1\}$
-can not exist, meaning that the measurement outcome of some measurement on $S$
-can not be classically predicted by $f$.
+for which a non-contextual hidden-variable labelling function $f:S \rightarrow \{0, 1\}$
+with $\sum_{v \in B} f(v) = 1$ for any orthonormal basis $B \subseteq S$ can not exist.
 
 Since the original proof of the Kochen-Specker theorem,
 multiple such configurations were found,
 motivating the definition of a Kochen-Specker set.
 \begin{definition}
     A \emph{Kochen-Specker set} $S$ is a configuration of
-    rays in some Hilbert space which have no hidden-variable labelling and
-    therefore give a proof of the Kochen-Specker theorem.
+    rays in some Hilbert space which have no hidden-variable labelling.
 \end{definition}
 Note that the magic square game from Section~\ref{sec:magic-square} has essentially those properties.
 There is no classical labelling function $f$ which allows the players
-to win with certainty. Yet, the measurements involved in the
-winning quantum strategy perfectly describe the state space of 
-the magic square game, which is why the players can exploit their
-shared quantum state to win with absolute certainty.
+to win with certainty.
 
-As it turns out, there is a natural way to construct a Kochen-Specker set associated to the magic square
+Yet, as it turns out, there is a natural way to construct a Kochen-Specker set
+associated to the perfect quantum strategy magic square
 by considering the rays spanned by the simultaneous eigenstates of each row, giving 
 a highly symmetric configuration in $\mathbb{R}^4$ known as the 24-cell.
 Respectively, the rays coming from the mutual eigenstates
@@ -89,6 +84,7 @@ of each column the column form the dual of the 24-cell, see~\cite{article} and~\
 
 
 \subsection{The Graphs $Q$ and $Q^*$}
+\input{penrose-graphic}
 
 In~\cite{ZIMBA1993697}, the discussion about the non-existence of 
 hidden-variable labelling functions included the graphs $Q$ and $Q^*$,
@@ -96,15 +92,16 @@ which gives the basis of the main objective for this report.
 \begin{definition}
     We define the following graphs:
     \begin{enumerate}
-        \item The graph $Q = (V_Q, E_Q)$ is the orthogonality graph of $\Phi$, i.e. 
-            \begin{align}
-                V_Q = \left\{ v_i := v_{|\phi_i \rangle}~\middle|~|\phi_i \rangle \in \Phi \right\},~E_Q = \left\{ (v_i, v_j) \iff \langle \phi_i | \phi_j \rangle = 0 \right\}
-            \end{align}
+        \item The graph $Q$ is the orthogonality graph of $\Phi$, i.e. 
+            \begin{align*}
+                V(Q) = \left\{ v_i := v_{|\phi_i \rangle}~\middle|~|\phi_i \rangle \in \Phi \right\},~E(Q) = \left\{ (v_i, v_j) \iff \langle \phi_i | \phi_j \rangle = 0 \right\}
+            \end{align*}
 
-        \item The graph $Q^* = (V_{Q^*}, E_{Q^*})$ is called the clique graph of $Q$, with
-            \begin{align}
-                V_{Q^*} = \left\{ v_S~|~S \subset \Phi \textrm{ orthonormal basis} \right\},~E_{Q^*} = \left\{ (v_{S_1}, v_{S_2}) \iff S_1 \cap S_2 \neq \emptyset \right\}
-            \end{align}
+        \item The graph $Q^*$ is called the clique graph of $Q$, with
+            \begin{align*}
+                &V(Q^*) = \left\{ v_S~|~S \subset \Phi \textrm{ orthonormal basis} \right\}, \\
+                &E(Q^*) = \left\{ (v_{S_1}, v_{S_2}) \iff S_1 \cap S_2 \neq \emptyset \right\}.
+            \end{align*}
             In words, the vertices of $Q^*$ correspond to the orthonormal bases of $\Phi$,
             and vertices share an edge if the respective bases share a vector.
     \end{enumerate}
@@ -112,14 +109,14 @@ which gives the basis of the main objective for this report.
 
 \subsubsection{A curious duality.}
 As noted in~\cite{ZIMBA1993697}, the graphs have unusually many properties in common.
-As an example, the fact that $|V_Q| = |V_{Q^*}| = 40$ a priori appears to be purely coincidental.
+As an example, the fact that $|V(Q)| = |V(Q^*)| = 40$ a priori appears to be purely coincidental.
 For reference, considering the graph $G_{E_8}^*$ as the clique graph of $G_{E_8}$,
-we have $|G_{E_8}| = 120 \neq 2025 = |G_{E_8}^*|$, which appear to be 
+we have $|V(G_{E_8})| = 120 \neq 2025 = |V(G_{E_8}^*)|$, which appear to be 
 unrelated measures.
 
 Moreover, the condition $S_1 \cap S_2 \neq \emptyset$ that determines whether vertices in $Q^*$
-are connected is equivalent to the condition
-$\exists \tilde{v} \in \Phi:S_1 \cap S_2 = \{ \tilde{v} \}$, i.e. orthonormal bases in $\Phi$ share at most one ray.
+are connected is equivalent to the condition that
+$S_1 \cap S_2 = \{ \tilde{v} \}$ for some $\tilde{v}$, i.e. orthonormal bases in $\Phi$ share at most one ray.
 This gives an interesting duality between $Q$ and $Q^*$,
 since the maximal 4-cliques in $Q^*$ correspond to a unique vertex in $Q$ and vice versa.
 Additionally, the two graphs are both strongly regular graphs with the same parameters,
@@ -139,7 +136,7 @@ We see next that these properties suggest the existence of a quantum isomorphism
     have exactly three eigenvalues, where the first one is equal to $k$ and the other two are called 
     restricted eigenvalues $r, s$.
     Next, due to~\cite[Theorem 9.1.3]{brouwer12},
-    the values of $r$ and $s$ determine the values of $n,k,\lambda,\mu$ uniquely, and vice versa.
+    the values of $r$ and $s$ determine the values of $n,k,\lambda,\mu$ uniquely and vice versa.
     Since quantum isomorphic graphs are cospectral~\cite{atserias2017quantumnonsignallinggraphisomorphisms},
     meaning that their spectrum $(k, r, s)$ is preserved, we arrive at our claim.
 \end{proof}
@@ -150,12 +147,10 @@ and not some other graph in $\textsf{SRG}(40, 12, 2, 4)$,
 we make use of a result stating that quantum isomorphic graphs admit
 the same number of homomorphism counts from any planar graph.
 \begin{theorem}
-    \emph{\textbf{\cite[Theorem 7.16]{mančinska2019quantumisomorphismequivalentequality}}}
-    Let G and H be graphs. Then the following are equivalent:
-    \begin{itemize}
-        \item $G \cong_q H$, i.e. there is a perfect quantum strategy for the $(G, H)$-isomorphism game;
-        \item $G$ and $H$ admit the same number of homomorphisms from any planar graph.
-    \end{itemize}
+    \emph{\textbf{(\cite[Theorem 7.16]{mančinska2019quantumisomorphismequivalentequality})}}
+    Let G and H be graphs, and assume
+    $G \cong_q H$, i.e. there is a perfect quantum strategy for the $(G, H)$-isomorphism game.
+    Then $G$ and $H$ admit the same number of homomorphisms from any planar graph.
 \end{theorem}
 By iterating over all graphs in $\textsf{SRG}(40, 12, 2, 4)$
 (of which only 28 exist, see the classification in~\cite{Spence2000}),
@@ -171,36 +166,42 @@ we may directly compute the homomorphism count
 \[ |\textrm{Hom}(K_4, Q)| = |\textrm{Hom}(K_4, Q^*)| = 4! \cdot 40 = 960, \]
 while the homomorphism count for any of the other graphs is at most
 $4! \cdot 24 = 576$.
-While this computation neither proves nor strengthens the claim
+While this computation doe not prove the claim
 that $Q$ and $Q^*$ are quantum isomorphic, it shows that 
 if any of the two graphs admit a quantum isomorphism, it has to 
 map into the other graph of this pair.
 
+Even more remarkably, it was shown by direct computation that there does not exist
+any planar graph with less than 9 vertices
+that distinguishes $Q$ from $Q^*$ via their homomorphism counts, which strengthens 
+our conjecture that no such graph exists at all.
 
 
-\subsection{$Q$ has Quantum Independence Number $10$}
+\subsection{$Q$ has Quantum Independence Number $\geq 10$}
 
 We recall from the discussion in Section~\ref{sec:ksset} that $Q$ is the orthogonality graph of the Penrose dodecahedron,
 which forms a Kochen-Specker set.
-%
-In particular, it forms a \emph{projective Kochen-Specker set}, which is a Kochen-Specker set constructed from $k$ orthonormal bases,
-such that there is no subset of $k$ mutually non-orthogonal vectors.
-In terms of its orthogonality graph, this means that the independence number is smaller than the number of disjoint cliques.
+This property can be understood that the set contains $k$ orthonormal bases,
+while not containing an independent set of size $k$.
+In terms of its orthogonality graph, this means that the independence number is smaller
+than the number of disjoint cliques.
 
 This is indeed the case for our graph $Q$, as $k = 10$, yet $\alpha(Q) = 7 < 10$.
 From~\cite{godsil2024quantumindependencechromaticnumbers}, we see that this already implies $\alpha_q(Q) > \alpha(Q)$.
 Explicitly, we give an optimal strategy for the $(Q, 10)$-independent set game which proves the bound $\alpha_q(Q) \geq 10$.
 
 \begin{lemma}
-    Let $\mathcal{A} = M_4(\mathbb{C})$. Then, the following strategy is an optimal
-    strategy for the $(Q, 10)$-independent set game.
+    Let $\mathcal{A} = M_4(\mathbb{C})$. Then there exists a perfect strategy for the $(Q, 10)$-independent set 
+    game. 
+\end{lemma}
+\begin{proof}
+    Consider the set of projections obtained as follows.
     \begin{itemize}
         \item Choose a partition of $V(Q)$ into ten disjoint cliques $C_x$. This is possible as $\alpha(Q^*) = 10$.
         \item $P_{xu} = |v_u \rangle\langle v_u|$ if $v_u$ is contained in clique $C_x$, otherwise $P_{xu} = 0$. 
     \end{itemize}
-\end{lemma}
-\begin{proof}
-    We check whether the defining conditions from Definition~\ref{def:quindep} hold for our choice of projections.
+    In order to show that it gives rise to an optimal strategy, we verify that the defining
+    conditions from Definition~\ref{def:quindep} hold for our choice of projections.
     First, we see that $\sum_{u \in V(Q)} P_{xu} = I_4$ as we sum over the vectors contained in a 
     fixed clique, which translates to summing over the projections
     of an orthonormal basis, giving $I_4$.
@@ -216,19 +217,19 @@ Explicitly, we give an optimal strategy for the $(Q, 10)$-independent set game w
 \end{proof}
 Note that this construction is essentially the one described in~\cite{godsil2024quantumindependencechromaticnumbers}.
 %
-Furthermore, we observe that quantum isomorphic graphs $G, H$ must have the
-same quantum independence number, since the existence of a perfect quantum strategy
-for the $(G, k)$-independent set game may be transferred to a perfect quantum strategy
-for the $(H, k)$-independent set game and vice versa, using the perfect 
-strategy for the $(G, H)$-isomorphism game.
-
+Furthermore, as described in~\cite[Lemma 5.14]{atserias2017quantumnonsignallinggraphisomorphisms},
+it is true that quantum isomorphic graphs
+$G, H$ must have the same quantum independence number,
+since the set of mutually non-adjacent vertices in $G$ giving rise
+to a perfect quantum strategy for the $(G, k)$-independent set game 
+are mapped to mutually non-adjacent vertices in $H$, via the quantum isomorphism
+between $G$ and $H$.
 
 \subsection{An Interpretation of $Q$ and $Q^*$ in terms of Qutrit Pauli's}
 In this section we describe a natural way of identifying vectors
 of the Penrose dodecahedron in terms of qutrit Pauli matrices,
 answering a question in~\cite{Planat_2007} 
 and allowing to deepen our understanding of the structure of $Q$.
-% Furthermore, this facilitates the analysis of actions on $Q$ and $Q^*$.
 
 Recall that the generalized Paulis $X_r$ and $Z_r$ are the
 unique operators on $\mathbb{C}^r$ fulfilling
@@ -302,7 +303,7 @@ necessary to understand the structure of $Q^*$.
 \begin{definition}\cite{O’Meara2000}
     Let $k$ be a field, and $V \cong k^n$ a vector space over $k$.
     A \emph{quadratic form} over $k$ is a function $q : V \rightarrow k$
-    which stems from a degree-2 homogeneous polynomial in $k[x_1, \dots, x_n]$.
+    which is defined as the evaluation of a degree-2 homogeneous polynomial in $k[x_1, \dots, x_n]$.
     In particular,
     \[ q(\lambda v) = \lambda^2 q(v)\]
     for any $\lambda \in k$.
@@ -332,7 +333,7 @@ Furthermore, the adjacency relation is defined by isotropy of the corresponding
 two points in the respective space.
 %
 This may be reformulated further,
-as there is a representation $\spfourthree \rightarrow GL_4(\mathbb{C})$ 
+as there is a representation $\spfourthree \rightarrow GL_9(\mathbb{C})$ 
 given by the 2-qutrit Pauli group $\mathcal{P}_9$.
 \begin{lemma}
     Let $\spfourthree$ be the vector space $\mathbb{F}_3^4$ equipped with the symplectic form

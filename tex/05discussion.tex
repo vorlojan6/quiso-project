@@ -1,22 +1,24 @@
 \section{Discussion}
 
 We have seen that the graphs arising from the Penrose dodecahedron share many unusual 
-properties which hint to the fact that they might be quantum isomorphic,
-and moreover, no property was found that definitely rules out this conjectured quantum isomorphism.
+properties, such as both being strongly regular with the same parameters,
+having compatible quantum independence numbers, and being the clique graph of each other,
+which all hint to the fact that they might be quantum isomorphic.
+Moreover, no property was found that definitely rules out this conjectured quantum isomorphism.
 
-Below we attempt to apply the method from~\cite{schmidt2022quantumisomorphicstronglyregular}
+Below we attempt to apply the method from~\cite{ALCO_2024__7_2_515_0}
 in order to directly construct this quantum isomorphism,
 and show that unfortunately, there are several structural hurdles
 that complicates the search for a suitable magic unitary.
 
-\subsection{Applying the Approach from~\cite{schmidt2022quantumisomorphicstronglyregular}}
+\subsection{Applying the Approach from~\cite{ALCO_2024__7_2_515_0}}
 We firstly observe that $Q^*$ has independence number $10$
 and, by straightforward computation, see that there are a total of $2880$ maximally independent sets,
-which translates to the fact that there are $2880$ possible partitions of $V(Q)$ into 10 4-cliques.
+which translates to the fact that there are $2880$ possible partitions of $V(Q)$ into disjoint 4-cliques.
 However, no subgroup of $\operatorname{Aut}(Q)$ exists that induces 10 orbits comprising of such cliques,
-unlike was found for $G_{E_8}$ in~\cite{schmidt2022quantumisomorphicstronglyregular}.
+unlike was found for $G_{E_8}$ in~\cite{ALCO_2024__7_2_515_0}.
 
-Secondly, it is impossible to apply the construction of $G^\omega$ in~\cite{schmidt2022quantumisomorphicstronglyregular}
+Secondly, it is impossible to apply the construction of $G^\omega$ in~\cite{ALCO_2024__7_2_515_0}
 to $Q$ in order to receive a graph isomorphic to $Q^*$.
 This is due to the following observations.
 Firstly, the induced subgraph of two disjoint cliques in $Q$ do not share the property of the analogous subgraphs of $G_{E_8}$ that for each vertex inside clique $V_i$, there are exactly as many neighbours in $V_j$ as there are non-neighbours. 
@@ -26,7 +28,7 @@ meaning that applying this form of switching changes the edge count.
 However, this contradicts the fact that $Q$ and $Q^*$, which have the same edge count, are related via this form of switching.
 
 More importantly, the duality between $Q$ and $Q^*$ that vertices in one graph are 4-cliques in the other 
-forbids us to fix a partition of 10 4-cliques, since any graph resulting from this procedure would still comprise of 10 disjoint 4-cliques. 
+forbids us to fix a partition of disjoint 4-cliques, since any graph resulting from this procedure would still comprise of 10 disjoint 4-cliques. 
 Assuming that such a graph is isomorphic to $Q^*$ implies that $Q$ has independence number 10, which is a contradiction.
 %
 Therefore, the magic unitary corresponding to the potential quantum isomorphism cannot be a block diagonal matrix

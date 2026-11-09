@@ -27,7 +27,8 @@ the assignment of the shared value is different. For example,
 \[ \left((z_1 \oplus z_2 \oplus z_3 = 0, \mathbf{101}), (z_1 \oplus z_4 \oplus z_7 = 1, \mathbf{010})\right) \in E(G) \]
 as the shared value $z_1$ is inconsistent.
 
-For the other graph $G_{\mathcal{F}_0}$, we consider the homogenization $\mathcal{F}_0$ of the magic square game, which is obtained by setting 
+For the other graph $G_{\mathcal{F}_0}$, we consider a variant $\mathcal{F}_0$ of the magic square game,
+which is obtained by setting 
 the right-hand side of all constraints $\ell$ to zero. 
 The adjacency rules for $G_{\mathcal{F}_0}$ remain the same as for $G_\mathcal{F}$.
 %
@@ -39,22 +40,22 @@ The statement that $G_\mathcal{F}$ and $G_{\mathcal{F}_0}$ are quantum isomorphi
 but non-isomorphic follows from the two theorems below, which state 
 the reductions from optimal classical strategies to classical isomorphisms
 and optimal quantum strategies to quantum isomorphisms of the corresponding graphs.
-\begin{theorem}~\cite{atserias2017quantumnonsignallinggraphisomorphisms}.
+\begin{theorem}[\cite{atserias2017quantumnonsignallinggraphisomorphisms}]
     Let $\mathcal{F}$ be a linear binary constraint system game with $m$ constraints.
     Then the following are equivalent:
     \begin{itemize}
-        \item $\mathcal{F}$ is satisfiable;
-        \item The graphs $G_\mathcal{F}$ and $G_{\mathcal{F}_0}$ are isomorphic;
+        \item There exists a perfect classical strategy for $\mathcal{F}$ 
+        \item The graphs $G_\mathcal{F}$ and $G_{\mathcal{F}_0}$ are isomorphic
         \item $\alpha(G_\mathcal{F}) = m$.
     \end{itemize}
 \end{theorem}
 %
-\begin{theorem}~\cite{atserias2017quantumnonsignallinggraphisomorphisms}.
+\begin{theorem}[\cite{atserias2017quantumnonsignallinggraphisomorphisms}].
     Let $\mathcal{F}$ be a linear binary constraint system game with $m$ constraints.
     Then the following are equivalent:
     \begin{itemize}
-        \item $\mathcal{F}$ is quantum satisfiable;
-        \item The graphs $G_\mathcal{F}$ and $G_{\mathcal{F}_0}$ are quantum isomorphic;
+        \item There exists a perfect quantum strategy for $\mathcal{F}$
+        \item The graphs $G_\mathcal{F}$ and $G_{\mathcal{F}_0}$ are quantum isomorphic
         \item $\alpha_q(G_\mathcal{F}) = m$.
     \end{itemize}
 \end{theorem}
@@ -64,16 +65,16 @@ are quantum isomorphic, yet non-isomorphic graphs, as there is an optimal quantu
 optimal classical strategy for $\mathcal{F}$.
 
 
-\subsection{Quantum Isomorphic Strongly Regular Graphs from the $E_8$ Root System~\cite{schmidt2022quantumisomorphicstronglyregular}}
+\subsection{Quantum Isomorphic Strongly Regular Graphs from the $E_8$ Root System (\cite{ALCO_2024__7_2_515_0})}
 
 We continue our survey with the only known example of a
 strongly regular graph with a non-isomorphic, quantum isomorphic counterpart.
-This section summarizes the main results that lead to its discovery in~\cite{schmidt2022quantumisomorphicstronglyregular}.
+This section summarizes the main results that lead to its discovery in~\cite{ALCO_2024__7_2_515_0}.
 \begin{definition}
     The $E_8$ root system $\Psi_{E_8}$ consists of the $112 + 128 = 240$ vectors in $\mathbb{R}^8$, being one of the following:
     \begin{enumerate}
         \item $|x \rangle = \pm |e_i\rangle \pm |e_j\rangle$, for all $1 \leq i < j \leq 8$, or
-        \item $|x\rangle = (x_1, \dots, x_8) \textrm{ with } x_i \in \{\pm1\} \textrm{ and } \prod_{i=1}^8 = 1$.
+        \item $|x\rangle = (x_1, \dots, x_8) \textrm{ with } x_i \in \{\pm1\} \textrm{ and } \prod_{i=1}^8 x_i = 1$.
     \end{enumerate}
 \end{definition}
 From this root system, we construct the orthogonality graph $G_{E_8}$ as follows.
@@ -85,32 +86,32 @@ to describe certain automorphisms of $G_{E_8}$.
 \begin{definition}
     The real (qubit) Pauli matrices are defined to be the following matrices:
     \begin{align}
-        I = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}, \quad
-        X = \begin{pmatrix}0 & 1 \\ 1 & 0\end{pmatrix}, \quad
-        Z = \begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix}, \quad
-        Y = XZ.
+        I_2 = \begin{pmatrix}1 & 0 \\ 0 & 1\end{pmatrix}, \quad
+        X_2 = \begin{pmatrix}0 & 1 \\ 1 & 0\end{pmatrix}, \quad
+        Z_2 = \begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix}, \quad
+        Y_2 = X_2 Z_2.
     \end{align}
 \end{definition}
-Recall the relations $X^\dagger = X,~Z^\dagger = Z,~Y^\dagger = -Y,~X^2 = Y^2 = Z^2 = I$.
-Note also that from these relations it follows that $X$ and $Z$ anticommute, i.e. $XZ = -ZX$.
+Recall the relations $X_2^\dagger = X_2,~Z_2^\dagger = Z_2,~Y_2^\dagger = -Y_2,~X_2^2 = Y_2^2 = Z_2^2 = I_2$.
+Note also that from these relations it follows that $X_2$ and $Z_2$ anticommute, i.e. $X_2 Z_2 = -Z_2 X_2$.
 We will use these facts to show the following theorem.
 \begin{theorem}
-    The 3-qubit Pauli matrices $M := M_0 \otimes M_1 \otimes M_2$ with $M_i \in \{I,X,Y,Z\}$ induce automorphisms
+    The 3-qubit Pauli matrices $M := M_0 \otimes M_1 \otimes M_2$ with $M_i \in \{I_2,X_2,Y_2,Z_2\}$ induce automorphisms
     $\sigma_M : V(G_{E_8}) \rightarrow V(G_{E_8}),~v_x \mapsto v_{Mx}$
     which form a subgroup $L \cong \mathbb{Z}_2^6$ of $\operatorname{Aut}(G_{E_8})$.
 \end{theorem}
 \begin{proof}
     In order to show $\sigma_M \in \operatorname{Aut}(G_{E_8})$, we observe that
-    the generators $I\otimes I \otimes X, I\otimes I \otimes Z$,
-    $I\otimes X \otimes I$, $I\otimes Z \otimes I$, $X\otimes I \otimes I$, $Z\otimes I \otimes I$
+    the generators $I_2\otimes I_2 \otimes X_2, I_2\otimes I_2 \otimes Z_2$,
+    $I_2\otimes X_2 \otimes I_2$, $I_2\otimes Z_2 \otimes I_2$, $X_2\otimes I_2 \otimes I_2$, $Z_2\otimes I_2 \otimes I_2$
     are signed permutation matrices, flipping an even number of signs.
     As this preserves the defining properties of begin a root vector of $E_8$, 
     and any element $M \in L$ is a product of these generators, we deduce 
     that $M \in \operatorname{Aut}(G_{E_8})$.
     %
     Note that due to the identification $v_x = v_{-x}$ for vectors $x \in \Psi_{E_8}$,
-    the anti-commuting property $ZX = \pm XZ$ descends to equality of automorphisms in $L$.
-    As furthermore $X^2 = Z^2 = I$, we get $\{ \sigma_I, \sigma_X, \sigma_Z, \sigma_{XZ} \} \cong \mathbb{Z}_2^2$ for each tensor term.
+    the anti-commuting property $Z_2 X_2 = \pm X_2 Z_2$ descends to equality of automorphisms in $L$.
+    As furthermore $X_2^2 = Z_2^2 = I_2$, we get $\{ \sigma_{I_2}, \sigma_{X_2}, \sigma_{Z_2}, \sigma_{X_2 Z_2} \} \cong \mathbb{Z}_2^2$ for each tensor term.
     Moreover, since each tensor factor is independent of the other, we get $L \cong (\mathbb{Z}_2^2)^3 \cong \mathbb{Z}_2^6$.
 \end{proof}
 Next we show that two vertices $v_x, v_{y} \in V_i$ have the same stabilizers under $L$.
